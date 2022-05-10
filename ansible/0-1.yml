@@ -1,0 +1,90 @@
+---
+- name: Prepare for Ansible
+  hosts: all
+  remote_user: root
+
+  vars_files:                                                                  
+    - vars.yml
+
+  tasks:
+    - debug: msg = "Host is {{ ansible_fqdn }}"
+
+    - name: Edit /etc/sudoers
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        insertafter: '# WHEEL_USERS ALL=\(ALL\) NOPASSWD: ALL'
+        line: '{{ username }} ALL=(ALL) NOPASSWD: ALL'
+
+
+
+- name: Установка и настройка ПО для работы с токенами. На сервере и на клиенте.
+  hosts: all
+  remote_user: user
+  
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    - name: install pkg for tokens
+      become: yes
+      apt_rpm:
+        pkg:
+          - opensc
+          - librtpkcs11ecp
+          - libjcpkcs11
+          - isbc-pkcs11
+          - pcsc-lite
+          - pcsc-tools
+          - gnutls-utils
+          - libp11                    # for openssl engine
+          - libp11-kit
+          - color-prompt-and-man
+        state: present
+        update_cache: yes
+
+
+    - name: Permit pcsc for all. Attention on colon in stdout. Use quote the entire line.
+      become: yes
+      ansible.builtin.replace:
+        path: /usr/share/polkit-1/actions/org.debian.pcsc-lite.policy
+        regexp: '>no<'
+        replace: '>yes<'
+        backup: yes
+
+    - name: Enable pcscd.socket
+      become: yes
+      ansible.builtin.systemd:
+        state: started
+        name: pcscd.socket
+
+    - name: Check polkit for pcsc
+      ansible.builtin.shell: pcsc_scan -r
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "register.stdout: {{ out.stdout }}"
+
+    - name: Check that the /usr/lib64/libjckt2.so (JC GOST slot) exist
+      stat:
+        path: /usr/lib64/pkcs11/libjckt2.so
+      register: stat_result
+
+    - name: Create the file, if it doesnt exist already
+      become: yes
+      ansible.builtin.file:
+        src: /usr/lib64/libjckt2.so
+        dest: /usr/lib64/pkcs11/libjckt2.so
+        state: link
+      when: not stat_result.stat.exists
+
+    - name: Test p11-kit-proxy.so
+      ansible.builtin.shell: pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T                                  
+      register: out
+      failed_when: out.stdout is regex('(failed|error|fault)', ignorecase=true)
+
+    - ansible.builtin.debug:                                                   
+        msg:                                                                   
+          - "register.cmd: {{ out.cmd }}"                                    
+          - "{{ out.stdout_lines }}"

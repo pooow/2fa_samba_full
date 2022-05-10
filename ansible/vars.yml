@@ -1,0 +1,49 @@
+---
+username: user
+host_list: all
+ad_srv_shortname: sp8-srv-2022
+ocsp_srv_shortname: ocsp
+REALM: TEST5.ALT
+domain: test5.alt
+extension_file_KDC: ./cert_extension_KDC
+extension_file_user: ./cert_extension_user
+extension_file_ocsp: ./cert_extension_ocsp
+
+token:
+  - smb_user: rt_smb
+    name: rutoken
+    label_slot: RutokenECP2151
+    label_cert: rt_2fa_smb
+    id_cert: 7011
+    pin: 12345678                                                              
+    keySize: 1024
+  - smb_user: es_smb
+    name: esmart                                                               
+    label_slot: esmart_64
+    label_cert: es_2fa_smb
+    id_cert: 7012
+    pin: 12345678
+    keySize: 2048
+  - smb_user: jc_smb
+    name: jacarta                                                              
+    label_slot: jacarta-slot-laser                                                  
+    label_cert: jc_2fa_smb
+    id_cert: 7013
+    pin: 11111111
+    keySize: 2048
+
+label_cert_keys: 2fa_smb
+
+t:
+  - short: rt
+    name: rutoken
+    label_slot: RutokenECP2151
+    pin: 12345678
+  - short: es
+    name: esmart
+    label_slot: esmart_64
+    pin: 12345678
+  - short: jc
+    name: jacarta
+    label_slot: jacarta-slot-laser
+    pin: 11111111
