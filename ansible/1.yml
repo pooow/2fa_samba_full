@@ -16,6 +16,7 @@
 
 
   tasks:
+
     - name: Remove demoCA
       shell: rm -rf demoCA
 
@@ -228,6 +229,137 @@
       register: reg                                                            
                                                                                
     - debug: "var=reg"
+
+
+    - name: Remove old certs and keys from Samba
+      become: yes
+      ansible.builtin.file:
+        path: /var/lib/samba/private/tls/
+        state: absent
+
+
+    - name: Create tls folder from Samba
+      become: yes
+      ansible.builtin.file:
+        path: /var/lib/samba/private/tls
+        state: directory
+
+    - name: Copy CA cert to samba
+      become: yes
+      ansible.builtin.copy:
+        src: demoCA/certs/cacert.pem
+        dest: /var/lib/samba/private/tls/cacert.pem
+        remote_src: yes
+
+    - name: Copy DC key to samba
+      become: yes
+      ansible.builtin.copy:
+        src: demoCA/private/dc-key.pem
+        dest: /var/lib/samba/private/tls/dc-key.pem
+        mode: 0600
+        remote_src: yes
+
+    - name: Copy DC cert to samba
+      become: yes
+      ansible.builtin.copy:
+        src: demoCA/certs/dc-cert.pem
+        dest: /var/lib/samba/private/tls/dc-cert.pem
+        remote_src: yes
+
+    - name: Add TLS to smb.conf
+      become: yes
+      ansible.builtin.blockinfile:
+        path: /etc/samba/smb.conf
+        state: present
+        insertbefore: "\\[sysvol\\]"
+        block: |2
+                  tls enabled = yes
+                  tls certfile = /var/lib/samba/private/tls/dc-cert.pem
+                  tls keyfile = /var/lib/samba/private/tls/dc-key.pem
+                  tls cafile = /var/lib/samba/private/tls/cacert.pem
+        backup: yes
+          #      \\ - escape character                                        
+          #      |2 - add whitespaces at start, like in block. “Yaml Block Indentation Indicator”
+
+
+    - name: Add pkinit to kerberos on samba AD 1
+      become: yes
+      ansible.builtin.lineinfile:
+        path: /etc/krb5.conf
+        state: present
+        insertafter: "dns_lookup_kdc"
+        line: '         pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem'
+
+    - name: Add pkinit to kerberos on samba AD 2
+      become: yes
+      ansible.builtin.blockinfile:
+        path: /etc/krb5.conf
+        state: present
+        insertafter: EOF
+        block: |
+          [kdc]
+          enable-pkinit = yes
+          pkinit_identity = FILE:/var/lib/samba/private/tls/dc-cert.pem,/var/lib/samba/private/tls/dc-key.pem
+          pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem
+          pkinit_principal_in_certificate = yes
+          pkinit_win2k_require_binding = yes
+        backup: yes
+
+    - name: Reload Samba after edit krb5.conf.
+      become: yes
+      ansible.builtin.systemd:
+        state: restarted
+        daemon_reload: yes
+        name: samba.service
+
+    - name: Check Samba AD user exist
+      become: yes
+      ansible.builtin.shell: |
+        samba-tool user list
+      register: samba_user_check_exist
+
+    - name: Delete Samba AD user if it exist                                          
+      become: yes                                                              
+      ansible.builtin.shell:                                                  
+        samba-tool user delete {{ item.smb_user }}
+      when: item.smb_user in samba_user_check_exist.stdout                                 
+      loop: "{{ token }}"
+      register: reg
+
+    - debug:                                                                   
+        msg:                                                                   
+          - "{{ reg.results | map(attribute='cmd') | list }}"                  
+          - "{{ reg.results | map(attribute='stdout_lines') | list }}"
+      when: reg is defined
+
+
+    - name: Create Samba AD user
+      become: yes
+      ansible.builtin.shell: >
+         samba-tool user create {{ item.smb_user }} 'Pa$$word'
+         --given-name='{{ item.name }}'
+      loop: "{{ token }}"                                                      
+      register: reg
+  
+    - debug:                                                                   
+        msg:                                                                   
+          - "{{ reg.results | map(attribute='cmd') | list }}"                  
+          - "{{ reg.results | map(attribute='stdout_lines') | list }}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
