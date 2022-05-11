@@ -8,6 +8,7 @@ domain: test5.alt
 extension_file_KDC: ./cert_extension_KDC
 extension_file_user: ./cert_extension_user
 extension_file_ocsp: ./cert_extension_ocsp
+regen_keys_on_token: no
 
 token:
   - smb_user: rt_smb

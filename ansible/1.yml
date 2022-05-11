@@ -2,7 +2,7 @@
 - name: Generate CA
   hosts: ad
   remote_user: user
-  
+
   vars_files:
     - vars.yml
       #- vars/vars.yml
@@ -22,13 +22,34 @@
 
     - name: Create demoCA folder
       shell: mkdir -pv demoCA/{certs,newcerts,private}
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stdout_lines }}"
+
     - shell: touch demoCA/index.txt
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stdout_lines }}"
     - shell: echo "01" > demoCA/serial
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stdout_lines }}"
 
     - name: Create CA key
-      shell: | 
-        openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 \
+      shell: >
+        openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048
         -outform PEM -out demoCA/private/cakey.pem
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stderr_lines }}"
 
     - name: Create CA cert
       shell: |
@@ -39,19 +60,29 @@
     - ansible.builtin.debug:
         msg:
           - "register.cmd: {{ out.cmd }}"
-          - "register.stdout: {{ out.stdout }}"
+          - "{{ out.stderr_lines }}"
 
 
     - name: Create KDC key
       shell: openssl genrsa -out demoCA/private/dc-key.pem 2048
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stderr_lines }}"
 
     - name: Create KDC req
       shell: |
         openssl req -new -out demoCA/dc-req.csr -key demoCA/private/dc-key.pem \
         -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN={{ ad_srv_shortname }}.{{ domain }}"
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stderr_lines }}"
 
         #    - name: Create extension_file_KDC
-      
+
 
     - name: Create (copy) extension file for KDC cert
       copy:
@@ -74,18 +105,28 @@
           [kdc_principal_seq]
           name_type=EXP:0,INTEGER:1
           name_string=EXP:1,SEQUENCE:kdc_principals
-          
+
           [kdc_principals]
           princ1=GeneralString:krbtgt
           princ2=GeneralString:${ENV::REALM}
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          #          - "register.cmd: {{ out.cmd }}"
+          - "{{ out }}"
 
 
     - name: Create KDC cert
-      ansible.builtin.shell: |
-        env REALM={{ REALM }} openssl ca -batch -in demoCA/dc-req.csr \
-        -out demoCA/certs/dc-cert.pem \
-        -cert demoCA/certs/cacert.pem -extfile demoCA/{{ extension_file_KDC }} \
+      ansible.builtin.shell: >
+        env REALM={{ REALM }} openssl ca -batch -in demoCA/dc-req.csr
+        -out demoCA/certs/dc-cert.pem
+        -cert demoCA/certs/cacert.pem -extfile demoCA/{{ extension_file_KDC }}
         -extensions kdc_cert
+      register: out
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ out.cmd }}"
+          - "{{ out.stderr_lines }}"
 
     - name: Check tokens
       ansible.builtin.shell: pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T
@@ -100,23 +141,109 @@
       ansible.builtin.shell: >
         pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert
         --token-label {{ item.label_slot }}
-      loop: "{{ token }}"                                                          
+      loop: "{{ token }}"
       register: certs_on_tokens
 
+    - debug:
+        msg:
+          - "{{ certs_on_tokens.results | map(attribute='cmd') | list }}"
+          - "{{ certs_on_tokens.results | map(attribute='stdout_lines') | list }}"
 
-    - debug: "var=certs_on_tokens.results.{{item}}.stdout_lines"                             
-      with_sequence: "0-{{token|length - 1}}"
-        
 
     - name: Get keys on tokens
       ansible.builtin.shell: >
         pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey
         --token-label {{ item.label_slot }}
       loop: "{{ token }}"
+      loop_control:
+        extended: true
       register: keys_on_tokens
 
-    - debug: "var=keys_on_tokens.results.{{item}}.stdout_lines"
-      with_sequence: "0-{{ keys_on_tokens.results|length - 1}}"
+    - debug:
+        msg:
+          - "{{ keys_on_tokens.results | map(attribute='cmd') | list }}"
+          - "{{ keys_on_tokens.results | map(attribute='stdout_lines') | list }}"
+
+        #    - name: "Set variables"
+        #      set_fact:
+        #        del_keys: "{{ token | zip (keys_on_tokens.results) | product(['pubkey','privkey']) | list }}"
+        #
+        #    - debug: var=del_keys.id_cert
+        #    - debug: var=del_keys.1
+        #    - debug: var=del_keys.0.1
+        #    - debug: var=del_keys.1.1
+        #
+        #    - name: Output
+        #      debug:
+        #        var:
+        #          - item.1
+        #      loop: "{{ del_keys }}"
+        #      loop_control:
+        #        index_var: my_idx
+        #
+        #      #"del_keys.0.1": "pubkey"
+        #
+        #    - meta: end_play
+
+
+
+        #    - name: Give me list combo of three lists for delete keys on token
+        #      ansible.builtin.debug:
+        #        msg: "{{ token | zip (keys_on_tokens.results) | product(['pubkey','privkey']) | list }}"
+
+    - name: Delete old pub keys on rutoken
+      ansible.builtin.shell: >
+        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin {{ item.0.pin }}
+        --login --delete-object --type pubkey --id {{ item.0.id_cert }}
+        --token-label {{ item.0.label_slot }}
+      loop: "{{ token | zip (keys_on_tokens.results) | list }}"
+      when: (item.0.id_cert|string in item.1.stdout) and
+            (regen_keys_on_token == "yes")
+      register: del_pub_keys_on_tokens
+      tags: skipskip
+
+    - debug:
+        msg:
+          - "{{ del_pub_keys_on_tokens.results | map(attribute='cmd') | list }}"
+          - "{{ del_pub_keys_on_tokens.results | map(attribute='stdout_lines') | list }}"
+      when: del_pub_keys_on_tokens is defined
+
+
+
+    - name: Delete old priv keys on tokens
+      ansible.builtin.shell: >
+        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin {{ item.0.pin }}
+        --login --delete-object --type privkey --id {{ item.0.id_cert }}
+        --token-label {{ item.0.label_slot }}
+      loop: "{{ token | zip (keys_on_tokens.results) | list }}"
+      when: (item.0.id_cert|string in item.1.stdout) and
+            (regen_keys_on_token == "yes")
+      register: del_priv_keys_on_tokens
+
+    - debug:
+        msg:
+          - "{{ del_priv_keys_on_tokens.results | map(attribute='cmd') | list }}"
+          - "{{ del_priv_keys_on_tokens.results | map(attribute='stdout_lines') | list }}"
+      when: del_priv_keys_on_tokens is defined
+
+
+    - name: Generate keys for users on tokens
+      ansible.builtin.shell: >
+        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.0.pin }} -l
+        --keypairgen --key-type rsa:{{ item.0.keySize }} --id {{ item.0.id_cert }}
+        --label {{ item.0.label_cert }}
+        --token-label {{ item.0.label_slot }}
+      when: ((not item.0.id_cert|string in item.1.stdout) and
+            (not item.0.label_cert in item.1.stdout)) or
+            (del_priv_keys_on_tokens is defined)
+      loop: "{{ token | zip (keys_on_tokens.results) | list }}"
+      register: gen_keys
+
+    - debug:
+        msg:
+          - "{{ gen_keys.results | map(attribute='cmd') | list }}"
+          - "{{ gen_keys.results | map(attribute='stdout_lines') | list }}"
+      when: gen_keys is defined
 
 
     - name: Delete old cert with label match
@@ -126,6 +253,13 @@
         --token-label {{ item.0.label_slot }}
       when: item.0.label_cert in item.1.stdout
       loop: "{{ token | zip (certs_on_tokens.results) | list }}"
+      register: reg
+
+    - debug:
+        msg:
+          - "{{ reg.results | map(attribute='cmd') | list }}"
+          - "{{ reg.results | map(attribute='stdout_lines') | list }}"
+      when: reg is defined
 
 
     - name: Create request cert for users
@@ -137,14 +271,14 @@
       loop: "{{ token }}"
       register: gen_cert_req
 
-    - debug: "var=gen_cert_req.results.{{item}}.stdout_lines"
-      with_sequence: "0-{{ gen_cert_req.results|length - 1}}"
-    - debug: "var=gen_cert_req.results.{{item}}.cmd"                  
-      with_sequence: "0-{{ gen_cert_req.results|length - 1}}"
-
+    - debug:                                                                   
+        msg:                                                                   
+          - "{{ gen_cert_req.results | map(attribute='cmd') | list }}"                  
+          - "{{ gen_cert_req.results | map(attribute='stderr_lines') | list }}"         
+      when: gen_cert_req is defined
 
     - name: Создаем файл расширений (extensions) сертификата, для пользователя домена
-      copy:                                                                    
+      copy:
         dest: "demoCA/{{ extension_file_user }}"
         content: |
           [ kdc_user ]
@@ -156,7 +290,7 @@
           issuerAltName          = issuer:copy
           extendedKeyUsage       = clientAuth,1.3.6.1.4.1.311.20.2.2
           authorityInfoAccess    = OCSP;URI:http://{{ ad_srv_shortname }}.{{ domain }}
-          
+
 
     - name: Issue cert for users
       ansible.builtin.shell: >
@@ -165,12 +299,12 @@
         -extfile demoCA/{{ extension_file_user }} -extensions kdc_user
       loop: "{{ token }}"
       register: gen_cert_users
-      
-    - debug: "var=gen_cert_users.results.{{item}}.stdout_lines"                  
-      with_sequence: "0-{{ gen_cert_users.results|length - 1}}"                  
-    - debug: "var=gen_cert_users.results.{{item}}.cmd"                           
-      with_sequence: "0-{{ gen_cert_users.results|length - 1}}"
 
+    - debug:                                                                   
+        msg:                                                                   
+          - "{{ gen_cert_users.results | map(attribute='cmd') | list }}"         
+          - "{{ gen_cert_users.results | map(attribute='stderr_lines') | list }}"
+      when: gen_cert_users is defined
 
     - name: Copy cert for user on token
       ansible.builtin.shell: >
@@ -190,19 +324,21 @@
         #      with_sequence: "0-{{ reg.results|length - 1}}"
 
 
-    - name: Create OCSP key                                                      
-      ansible.builtin.shell: >                                                                 
+    - name: Create OCSP key
+      ansible.builtin.shell: >
         openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048
         -outform PEM -out demoCA/private/ocsp-key.pem
-      register: reg                                                            
-                                                                               
-    - debug: "var=reg"                                                         
+      register: reg
 
+    - ansible.builtin.debug:                                                   
+        msg:                                                                   
+          - "register.cmd: {{ reg.cmd }}"                                      
+          - "{{ reg.stderr_lines }}"
 
     - name: Создаем файл расширений (extensions) сертификата службы OCSP
-      copy:                                                                    
-        dest: "demoCA/{{ extension_file_ocsp }}"                               
-        content: |                                                             
+      copy:
+        dest: "demoCA/{{ extension_file_ocsp }}"
+        content: |
           [ ocsp ]
           # Extension for OCSP signing certificates (`man ocsp`).
           basicConstraints = CA:FALSE
@@ -210,25 +346,33 @@
           authorityKeyIdentifier = keyid,issuer
           keyUsage = critical, digitalSignature
           extendedKeyUsage = critical, OCSPSigning
+      register: reg
+    - debug: "var=reg"
 
 
-    - name: Create OCSP req                                                     
+    - name: Create OCSP req
       ansible.builtin.shell: >
         openssl req -new -out demoCA/ocsp-req.csr -key demoCA/private/ocsp-key.pem
         -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN={{ ocsp_srv_shortname }}.{{ domain }}"
       register: reg
 
-    - debug: "var=reg"
+    - ansible.builtin.debug:                                                   
+        msg:                                                                   
+          - "register.cmd: {{ reg.cmd }}"                                      
+          - "{{ reg.stderr_lines }}"
 
 
-    - name: Create OCSP cert                                                    
-      ansible.builtin.shell: >                                                 
+    - name: Create OCSP cert
+      ansible.builtin.shell: >
         env REALM={{ REALM }} openssl ca -batch -in demoCA/ocsp-req.csr
-        -out demoCA/certs/ocsp-cert.pem -cert demoCA/certs/cacert.pem 
+        -out demoCA/certs/ocsp-cert.pem -cert demoCA/certs/cacert.pem
         -extfile demoCA/{{ extension_file_ocsp }} -extensions ocsp
-      register: reg                                                            
-                                                                               
-    - debug: "var=reg"
+      register: reg
+
+    - ansible.builtin.debug:                                                   
+        msg:                                                                   
+          - "register.cmd: {{ reg.cmd }}"                                      
+          - "{{ reg.stderr_lines }}"
 
 
     - name: Remove old certs and keys from Samba
@@ -236,6 +380,8 @@
       ansible.builtin.file:
         path: /var/lib/samba/private/tls/
         state: absent
+      register: reg                                                            
+    - debug: "var=reg"
 
 
     - name: Create tls folder from Samba
@@ -243,6 +389,8 @@
       ansible.builtin.file:
         path: /var/lib/samba/private/tls
         state: directory
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Copy CA cert to samba
       become: yes
@@ -250,6 +398,8 @@
         src: demoCA/certs/cacert.pem
         dest: /var/lib/samba/private/tls/cacert.pem
         remote_src: yes
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Copy DC key to samba
       become: yes
@@ -258,6 +408,8 @@
         dest: /var/lib/samba/private/tls/dc-key.pem
         mode: 0600
         remote_src: yes
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Copy DC cert to samba
       become: yes
@@ -265,6 +417,8 @@
         src: demoCA/certs/dc-cert.pem
         dest: /var/lib/samba/private/tls/dc-cert.pem
         remote_src: yes
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Add TLS to smb.conf
       become: yes
@@ -278,7 +432,9 @@
                   tls keyfile = /var/lib/samba/private/tls/dc-key.pem
                   tls cafile = /var/lib/samba/private/tls/cacert.pem
         backup: yes
-          #      \\ - escape character                                        
+      register: reg                                                            
+    - debug: "var=reg"
+          #      \\ - escape character
           #      |2 - add whitespaces at start, like in block. “Yaml Block Indentation Indicator”
 
 
@@ -289,6 +445,8 @@
         state: present
         insertafter: "dns_lookup_kdc"
         line: '         pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem'
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Add pkinit to kerberos on samba AD 2
       become: yes
@@ -304,6 +462,8 @@
           pkinit_principal_in_certificate = yes
           pkinit_win2k_require_binding = yes
         backup: yes
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Reload Samba after edit krb5.conf.
       become: yes
@@ -311,24 +471,33 @@
         state: restarted
         daemon_reload: yes
         name: samba.service
+      register: reg                                                            
+    - debug: "var=reg"
 
     - name: Check Samba AD user exist
       become: yes
       ansible.builtin.shell: |
         samba-tool user list
-      register: samba_user_check_exist
-
-    - name: Delete Samba AD user if it exist                                          
-      become: yes                                                              
-      ansible.builtin.shell:                                                  
-        samba-tool user delete {{ item.smb_user }}
-      when: item.smb_user in samba_user_check_exist.stdout                                 
-      loop: "{{ token }}"
-      register: reg
-
+      register: reg                                                            
+                                                                                  
     - debug:                                                                   
         msg:                                                                   
           - "{{ reg.results | map(attribute='cmd') | list }}"                  
+          - "{{ reg.results | map(attribute='stdout_lines') | list }}"         
+      when: reg is defined
+
+
+    - name: Delete Samba AD user if it exist
+      become: yes
+      ansible.builtin.shell:
+        samba-tool user delete {{ item.smb_user }}
+      when: item.smb_user in samba_user_check_exist.stdout
+      loop: "{{ token }}"
+      register: reg
+
+    - debug:
+        msg:
+          - "{{ reg.results | map(attribute='cmd') | list }}"
           - "{{ reg.results | map(attribute='stdout_lines') | list }}"
       when: reg is defined
 
@@ -338,489 +507,11 @@
       ansible.builtin.shell: >
          samba-tool user create {{ item.smb_user }} 'Pa$$word'
          --given-name='{{ item.name }}'
-      loop: "{{ token }}"                                                      
+      loop: "{{ token }}"
       register: reg
-  
-    - debug:                                                                   
-        msg:                                                                   
-          - "{{ reg.results | map(attribute='cmd') | list }}"                  
+
+    - debug:
+        msg:
+          - "{{ reg.results | map(attribute='cmd') | list }}"
           - "{{ reg.results | map(attribute='stdout_lines') | list }}"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    - meta: end_play
-        #      with_sequence: "0-{{token|length - 1}}"
-
-        #    - debug: var=keys_on_tokens
-        #
-        #    - debug: var=keys_on_tokens.results.1.stdout_lines
-
-
-      # keys_on_tokens.results.0.stdout_lines"
-      
-      #    - meta: end_play
-      #
-      #
-      #    - name: TEST when+debug+loop
-      #      debug: "var=keys_on_tokens.results.{{item}}.stdout_lines"
-      #      when: "{{item.id_cert in keys_on_tokens.results.item.stdout_lines
-      #      with_items:
-      #        - "{{ keys_on_tokens.results }}"
-
-      #    - debug: msg="Gets printed only if this item changed - {{ item.stdout_lines }}"
-    - debug: 
-        msg:
-          - "{{ item.0.id_cert }} --- {{ item.1.stdout }}"
-          - "{{ item.1 | map(attribute='stdout') | list }}"
-      when: item.0.id_cert|string in item.1.stdout
-      loop: "{{ token | zip (keys_on_tokens.results) | list }}"
-        #      with_nested:
-        #        - "{{ token }}"
-        #        - "{{ keys_on_tokens.results }}"
-
-      #      loop: "{{ keys_on_tokens.results|flatten(levels=1) }}"
-
-
-        # item.0 - это token
-        # item.1 - это keys_on_tokens.results
-
-    - name: Generate keys for users on tokens
-      ansible.builtin.shell: >
-        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.0.pin }} -l
-        --keypairgen --key-type rsa:{{ item.0.keySize }} --id {{ item.0.id_cert }}
-        --label {{ item.0.label_cert }}
-        --token-label {{ item.0.label_slot }}
-      when:
-        - not item.0.id_cert|string in item.1.stdout
-        - not item.0.label_cert in item.1.stdout
-      loop: "{{ token | zip (keys_on_tokens.results) | list }}"
-      loop_control:
-        extended: true
-      register: gen_keys
-
-    - debug: "var=gen_keys.results.{{item}}.cmd"
-      with_sequence: "0-{{gen_keys|length - 1}}"
-      when: gen_keys is defined
-
-
-    - name: Delete old certs on tokens
-      ansible.builtin.shell: >
-        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.0.pin }} -l
-        --delete-object --type cert --id {{ item.0.id_cert }}
-        --token-label {{ item.0.label_slot }}
-      when: "item.0.id_cert|string in item.1.stdout"
-      loop: "{{ token | zip (certs_on_tokens.results) | list }}"                
-      loop_control:                                                            
-        extended: true                                                         
-      register: del_certs
-
-    - debug: "var=del_certs.results.{{item}}.cmd"                                      
-      with_sequence: "0-{{ del_certs.results|length - 1}}"                                  
-      when: del_certs is defined
-
-                                                                               
-    - meta: end_play
-
-
-    - name: Generate keys for users on tokens
-      ansible.builtin.shell: >
-        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.pin }} -l
-        --keypairgen --key-type rsa:{{ item.keySize }} --id {{ item.id_cert }}
-        --label {{ item.short }}{{ label_cert_keys }}
-        --token-label {{ item.label_slot }}
-        #      when: "samba_2fa_label_rutoken not in item.stdout"
-      loop: "{{ token }}"
-      loop_control:
-        extended: true
-      register: r
-
-    - debug: "var=certs_on_tokens.results.{{item}}.stdout_lines"
-      with_sequence: "0-{{token|length - 1}}"
-
-
-    - meta: end_play
-
-
-    - name: Delete old cert on tokens
-      ansible.builtin.shell: |
-        pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.pin }} -l \
-        --delete-object --type cert --id {{ id_cert_keys }}{{ item.short }}
-      when: " in cert_on_rutoken.stdout"
-      loop: "{{ token }}"                                                      
-      loop_control:
-        extended: true
-      register: r
-                                                                               
-    - debug: "var=cert_on_rutoken.results.{{item}}.stdout_lines"               
-      with_sequence: "0-{{token|length - 1}}"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    - meta: end_play
-
-    - name: Check if file repo is present
-      ansible.builtin.shell: ls /mnt/space
-      register: repo_dir
-
-    - name: Add NFS repo
-      become: true
-      ansible.builtin.shell: mount 10.4.0.3:/space /mnt/space
-      when: repo_dir.stdout == ""
-
-
-    - name: install pkg for tokens
-      become: true
-      apt_rpm:
-        pkg:
-          - opensc
-          - librtpkcs11ecp
-          - pcsc-tools
-          - gnutls-utils
-          - libp11                    # for openssl engine
-        state: present
-        update_cache: yes
-
-    - name: Check polkit for pcsc
-      ansible.builtin.shell: pcsc_scan -r
-      register: pcsc_scan
-      ignore_errors: yes
-
-    - name: Permit pcsc for all. Attention on colon in stdout. Use quote the entire line.
-      become: true
-      ansible.builtin.replace:
-        path: /usr/share/polkit-1/actions/org.debian.pcsc-lite.policy
-        regexp: '>no<'
-        replace: '>yes<'
-        backup: yes
-      when: pcsc_scan.stderr is regex("SCardEstablishContext.*RPC transport error")
-
-
-    - name: Enable pcscd.socket
-      become: true
-      ansible.builtin.systemd:
-        state: started
-        name: pcscd.socket
-
-    - name: Check cert on rutoken
-      ansible.builtin.shell: pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so --list-object --type cert
-      register: cert_on_rutoken
-
-    - name: Delete old cert on rutoken
-      ansible.builtin.shell: |
-        pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so -p 12345678 -l \
-        --delete-object --type cert --id {{ samba_2fa_id_token }}
-      when: "samba_2fa_label_rutoken in cert_on_rutoken.stdout"
-
-
-    - name: Check key on rutoken
-      ansible.builtin.shell: pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so --list-object --type pubkey
-      register: pubkey_on_rutoken
-
-    - name: Delete old keys on rutoken
-      ansible.builtin.shell: |
-        p11tool --provider /usr/lib64/librtpkcs11ecp.so --login --set-pin=12345678 --batch \
-        --delete pkcs11:object={{ samba_2fa_label_rutoken }}
-      when: (samba_2fa_label_rutoken in pubkey_on_rutoken.stdout) and
-            (gen_key_token == "yes")
-
-
-    - name: Check key on rutoken 2
-      ansible.builtin.shell: pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so --list-object --type pubkey
-      register: pubkey_on_rutoken2
-
-    - name: Generate keys for users on token
-      ansible.builtin.shell:
-        pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so -p 12345678 -l \
-        --keypairgen --key-type rsa:2048 --id {{ samba_2fa_id_token }} \
-        --label {{ samba_2fa_label_rutoken }}
-      when: "samba_2fa_label_rutoken not in pubkey_on_rutoken2.stdout"
-
-
-    - name: Openssl engine pkcs11 setup 1
-      become: yes
-      ansible.builtin.lineinfile: 
-        path: /etc/openssl/openssl.cnf
-        state: present
-        insertbefore: BOF
-        line: openssl_conf = openssl_def
-
-    - name: Openssl engine pkcs11 setup 2
-      become: yes
-      ansible.builtin.blockinfile:
-        path: /etc/openssl/openssl.cnf
-        state: present
-        insertafter: EOF
-        block: |
-          [ openssl_def ]
-                  engines = engine_section
-          [ engine_section ]
-                  pkcs11 = pkcs11_section
-          [ pkcs11_section ]
-                  dynamic_path = /usr/lib64/openssl/engines-1.1/pkcs11.so
-                  MODULE_PATH = /usr/lib64/pkcs11/librtpkcs11ecp.so
-        backup: yes
-
-            
-    - name: Create user req
-      shell: |
-        openssl req -new -out demoCA/2fa_user.csr -keyform engine -engine pkcs11 \
-        -key pkcs11:object={{ samba_2fa_label_rutoken }} -passin pass:12345678 \
-        -subj "/C=RU/ST=Moscow/O=Basealt/CN=2fa_user"
-
-    - name: Issue cert for users
-      ansible.builtin.shell: |
-        openssl ca -batch -in demoCA/2fa_user.csr -out demoCA/certs/2fa_user.pem \
-        -cert demoCA/certs/cacert.pem -extfile demoCA/{{ extension_file_user }} \
-        -extensions kdc_user
-
-    - name: Create cert req for users
-      ansible.builtin.shell: echo
-
-    - name: Issue cert for users
-      ansible.builtin.shell: echo
-
-    - name: Copy cert for user on token
-      ansible.builtin.shell: |
-        pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so -p 12345678 -l \
-        --write-object ./demoCA/certs/2fa_user.pem --type cert \
-        --id {{ samba_2fa_id_token }} --label {{ samba_2fa_label_rutoken }}
-
-    - name: Stop Samba. For copy certs and keys.
-      become: yes
-      ansible.builtin.systemd:
-        state: stopped
-        name: samba.service
-
-    - name: Remove old certs and keys from Samba
-      become: yes
-      ansible.builtin.file:
-        path: /var/lib/samba/private/tls/
-        state: absent
-
-    - name: Create tls folder from Samba
-      become: yes
-      ansible.builtin.file:
-        path: /var/lib/samba/private/tls
-        state: directory
-
-    - name: Copy CA cert to samba
-      become: yes
-      ansible.builtin.copy:
-        src: demoCA/certs/cacert.pem
-        dest: /var/lib/samba/private/tls/cacert.pem
-        remote_src: yes
-          
-    - name: Copy DC key to samba
-      become: yes
-      ansible.builtin.copy:
-        src: demoCA/private/dc-key.pem
-        dest: /var/lib/samba/private/tls/dc-key.pem
-        mode: 0600
-        remote_src: yes
-
-    - name: Copy DC cert to samba
-      become: yes
-      ansible.builtin.copy:
-        src: demoCA/certs/dc-cert.pem
-        dest: /var/lib/samba/private/tls/dc-cert.pem
-        remote_src: yes
-
-    - name: Add TLS to smb.conf
-      become: yes
-      ansible.builtin.blockinfile:
-        path: /etc/samba/smb.conf
-        state: present
-        insertafter: "use rfc2307"
-        block: |
-                  tls enabled = yes
-                  tls certfile = /var/lib/samba/private/tls/dc-cert.pem
-                  tls keyfile = /var/lib/samba/private/tls/dc-key.pem
-                  tls cafile = /var/lib/samba/private/tls/cacert.pem
-        backup: yes
-
-
-    - name: Add pkinit to kerberos on samba AD 1
-      become: yes
-      ansible.builtin.lineinfile:
-        path: /etc/krb5.conf
-        state: present
-        insertafter: "dns_lookup_kdc"
-        line: '         pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem'
-
-    - name: Add pkinit to kerberos on samba AD 2
-      become: yes
-      ansible.builtin.blockinfile:
-        path: /etc/krb5.conf
-        state: present
-        insertafter: EOF
-        block: |
-          [kdc]
-          enable-pkinit = yes
-          pkinit_identity = FILE:/var/lib/samba/private/tls/dc-cert.pem,/var/lib/samba/private/tls/dc-key.pem
-          pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem
-          pkinit_principal_in_certificate = yes
-          pkinit_win2k_require_binding = yes
-        backup: yes
-
-    - name: Reload Samba after edit krb5.conf.
-      become: yes
-      ansible.builtin.systemd:
-        state: restarted
-        daemon_reload: yes
-        name: samba.service
-          
-    - name: Check Samba AD user exist
-      become: yes
-      ansible.builtin.shell: |
-        samba-tool user list
-      register: samba_user_check_exist
-
-    - name: Create Samba AD user
-      become: yes
-      ansible.builtin.shell: |
-         samba-tool user create 2fa_user 'Pa$$word' --given-name='Ivan' --surname='Petrov'
-         # samba-tool user create 2fa_user 'Pa$$word' --given-name='2fa_user'
-      when: not samba_user_check_exist.stdout is regex("2fa_user")
-
-    - name: Copy CA cert to ansible host
-      ansible.builtin.fetch:
-        src: /home/user/demoCA/certs/cacert.pem
-        dest: /tmp/prefix--cacert.pem
-        flat: yes        
-
-- name: RUN on client
-  hosts: sp8_ws_20211221
-  remote_user: user
-
-  vars:
-    extension_file_KDC: ./extension_file_KDC
-    samba_2fa_id_token: 7947
-    samba_2fa_label_rutoken: 2fa_samba_ad
-    gen_key_token: no
-    extension_file_user: ./extension_file_user
-
-  tasks:
-          
-    - name: Copy CA cert to member domain host
-      become: yes
-      ansible.builtin.copy:
-        src: /tmp/prefix--cacert.pem
-        dest: /etc/pki/tls/certs/cacert.pem
-
-    - name: Add pkinit to krb5.conf on client host
-      become: yes
-      ansible.builtin.blockinfile:
-        path: /etc/krb5.conf
-        state: present
-        insertafter: "default_ccache_name"
-        block: |
-          pkinit_anchors = DIR:/etc/pki/tls/certs/
-          pkinit_identities = PKCS11:librtpkcs11ecp.so:certid=7947
-          canonicalize = True
-        backup: yes
-          
-    - name: Add cert auth to sssd.conf on client host 1
-      become: yes
-      ansible.builtin.blockinfile:
-        path: /etc/sssd/sssd.conf
-        state: present
-        insertafter: '\[pam\]'
-        block: |
-          pam_cert_auth = True
-          pam_p11_allowed_services = +mate-screensaver, +lightdm
-          pam_cert_db_path = /etc/pki/tls/certs/cacert.pem
-        marker: "# Add cert auth to sssd.conf on client host 1"
-        backup: yes
-
-    - name: Add cert auth to sssd.conf on client host 2
-      become: yes
-      ansible.builtin.blockinfile:
-        path: /etc/sssd/sssd.conf
-        state: present
-        insertafter: EOF
-        block: |
-          [certmap/test2.alt/adcerts]
-          maprule = (|(userPrincipal={subject_principal})(samAccountName={subject_principal.short_name}))
-        marker: "# Add cert auth to sssd.conf on client host 2"
-        backup: yes
-          
- 
-    - name: Reload sssd after edit sssd.conf
-      become: yes
-      ansible.builtin.systemd:
-        state: restarted
-        daemon_reload: yes
-        name: sssd.service
-          
-
-    - meta: end_play
-
-
-    - name: Generate cert for users
-      ansible.builtin.shell: echo
-
-      #    - name: Get objects on rutoken
-      #      ansible.builtin.shell: pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so --list-object
-      #      register: objects_on_rutoken
-      #
-      #    - name: pubkey pattern
-      #      set_fact: pattern_cert="pubkey\\n\s.*label:\s.*"
-      #
-      #    - name: pubkey pattern 2
-      #      set_fact:
-      #        pubkey_and_label: "{{ pattern_cert }}{{ samba_2fa_label_rutoken }}"
-      #
-      #    - name: Delete old
-      #      ansible.builtin.shell: echo AAA
-      #      when: objects_on_rutoken.stdout is regex(pubkey_and_label)
-      #
-      #
-      #    - name: Debug version
-      #      debug:
-      #        msg: "{{ objects_on_rutoken.stdout | regex_search(version_re, '\\1', multiline=true) | first }}"
-      #      vars:
-      #        version_re: '{{ pattern_cert }}{{ samba_2fa_label_rutoken }}'
-      #
-      #
-      #
-      #    - meta: end_play
-      #
-      #    - name: Generate key on rutoken
-      #      ansible.builtin.shell: |
-      #        pkcs11-tool --module /usr/lib64/librtpkcs11ecp.so -p 12345678 -l \
-      #        --keypairgen --key-type RSA:1024 --id {{ samba_2fa_id_token }} \
-      #        --label {{ samba_2fa_label_rutoken }}
-
-        # p11tool --provider /usr/lib64/librtpkcs11ecp.so --login --set-pin=12345678 --delete "pkcs11:object=samba_2fa_label_rutoken" --batch
