@@ -44,7 +44,7 @@
         update_cache: yes
 
 
-    - name: Permit pcsc for all. Attention on colon in stdout. Use quote the entire line.
+    - name: Polkit permit pcsc for all. Attention on colon in stdout. Use quote the entire line.
       become: yes
       ansible.builtin.replace:
         path: /usr/share/polkit-1/actions/org.debian.pcsc-lite.policy
@@ -64,7 +64,7 @@
     - ansible.builtin.debug:
         msg:
           - "register.cmd: {{ out.cmd }}"
-          - "register.stdout: {{ out.stdout }}"
+          - "{{ out.stdout_lines }}"
 
     - name: Check that the /usr/lib64/libjckt2.so (JC GOST slot) exist
       stat:

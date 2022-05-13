@@ -2,6 +2,7 @@
 username: user
 host_list: all
 ad_srv_shortname: sp8-srv-2022
+smb_user_pass: 'Pa$$word'
 ocsp_srv_shortname: ocsp
 REALM: TEST5.ALT
 domain: test5.alt
@@ -32,19 +33,3 @@ token:
     id_cert: 7013
     pin: 11111111
     keySize: 2048
-
-label_cert_keys: 2fa_smb
-
-t:
-  - short: rt
-    name: rutoken
-    label_slot: RutokenECP2151
-    pin: 12345678
-  - short: es
-    name: esmart
-    label_slot: esmart_64
-    pin: 12345678
-  - short: jc
-    name: jacarta
-    label_slot: jacarta-slot-laser
-    pin: 11111111

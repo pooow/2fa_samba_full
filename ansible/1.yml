@@ -3,17 +3,9 @@
   hosts: ad
   remote_user: user
 
+  vars:
   vars_files:
     - vars.yml
-      #- vars/vars.yml
-
-  vars:
-    extension_file_KDC: ./extension_file_KDC
-    samba_2fa_id_token: 7947
-    samba_2fa_label_rutoken: 2fa_samba_ad
-    gen_key_token: no
-    extension_file_user: ./extension_file_user
-
 
   tasks:
 
@@ -220,11 +212,16 @@
             (regen_keys_on_token == "yes")
       register: del_priv_keys_on_tokens
 
+    - debug: var=del_priv_keys_on_tokens
+
     - debug:
         msg:
           - "{{ del_priv_keys_on_tokens.results | map(attribute='cmd') | list }}"
           - "{{ del_priv_keys_on_tokens.results | map(attribute='stdout_lines') | list }}"
+          - "item.skipped is: {{ del_priv_keys_on_tokens.results | map(attribute='skipped') | list }}"
+          - "item.changed is: {{ del_priv_keys_on_tokens.results | map(attribute='changed') | list }}"
       when: del_priv_keys_on_tokens is defined
+
 
 
     - name: Generate keys for users on tokens
@@ -235,15 +232,16 @@
         --token-label {{ item.0.label_slot }}
       when: ((not item.0.id_cert|string in item.1.stdout) and
             (not item.0.label_cert in item.1.stdout)) or
-            (del_priv_keys_on_tokens is defined)
-      loop: "{{ token | zip (keys_on_tokens.results) | list }}"
+            (item.2.changed)
+      loop: "{{ token | zip (keys_on_tokens.results, del_priv_keys_on_tokens.results) | list }}"
       register: gen_keys
 
     - debug:
         msg:
           - "{{ gen_keys.results | map(attribute='cmd') | list }}"
           - "{{ gen_keys.results | map(attribute='stdout_lines') | list }}"
-      when: gen_keys is defined
+      loop: "{{ gen_keys.results }}"
+      when: item.changed
 
 
     - name: Delete old cert with label match
@@ -474,44 +472,44 @@
       register: reg                                                            
     - debug: "var=reg"
 
-    - name: Check Samba AD user exist
-      become: yes
-      ansible.builtin.shell: |
-        samba-tool user list
+
+    - name: Check Samba AD user exist                                          
+      become: yes                                                              
+      ansible.builtin.shell: samba-tool user list                              
       register: reg                                                            
-                                                                                  
+                                                                               
+    - debug:                                                                   
+        msg:                                                                   
+          - "register.cmd: {{ reg.cmd }}"                                      
+          - "{{ reg.stdout_lines }}"                                           
+          - "{{ reg.stdout }}"                                                 
+                                                                               
+                                                                               
+    - name: Delete Samba AD user if it exist                                   
+      become: yes                                                              
+      ansible.builtin.shell: >                                                 
+        samba-tool user delete {{ item.smb_user }}                             
+      when: item.smb_user in reg.stdout                                        
+      loop: "{{ token }}"                                                      
+      register: reg2                                                           
+                                                                               
+    - name: Debug Delete Samba AD user if it exist                             
+      debug:                                                                   
+        msg:                                                                   
+          - "{{ reg2.results | map(attribute='cmd') | list }}"                 
+          - "{{ reg2.results | map(attribute='stdout_lines') | list }}"        
+      when: reg2 is defined                                                    
+                                                                               
+                                                                               
+    - name: Create Samba AD user                                               
+      become: yes                                                              
+      ansible.builtin.shell: >                                                 
+         samba-tool user create {{ item.smb_user }} {{ smb_user_pass }}        
+         --given-name={{ item.name }}                                          
+      loop: "{{ token }}"                                                      
+      register: reg                                                            
+                                                                               
     - debug:                                                                   
         msg:                                                                   
           - "{{ reg.results | map(attribute='cmd') | list }}"                  
-          - "{{ reg.results | map(attribute='stdout_lines') | list }}"         
-      when: reg is defined
-
-
-    - name: Delete Samba AD user if it exist
-      become: yes
-      ansible.builtin.shell:
-        samba-tool user delete {{ item.smb_user }}
-      when: item.smb_user in samba_user_check_exist.stdout
-      loop: "{{ token }}"
-      register: reg
-
-    - debug:
-        msg:
-          - "{{ reg.results | map(attribute='cmd') | list }}"
           - "{{ reg.results | map(attribute='stdout_lines') | list }}"
-      when: reg is defined
-
-
-    - name: Create Samba AD user
-      become: yes
-      ansible.builtin.shell: >
-         samba-tool user create {{ item.smb_user }} 'Pa$$word'
-         --given-name='{{ item.name }}'
-      loop: "{{ token }}"
-      register: reg
-
-    - debug:
-        msg:
-          - "{{ reg.results | map(attribute='cmd') | list }}"
-          - "{{ reg.results | map(attribute='stdout_lines') | list }}"
-
