@@ -269,10 +269,10 @@
       loop: "{{ token }}"
       register: gen_cert_req
 
-    - debug:                                                                   
-        msg:                                                                   
-          - "{{ gen_cert_req.results | map(attribute='cmd') | list }}"                  
-          - "{{ gen_cert_req.results | map(attribute='stderr_lines') | list }}"         
+    - debug:
+        msg:
+          - "{{ gen_cert_req.results | map(attribute='cmd') | list }}"
+          - "{{ gen_cert_req.results | map(attribute='stderr_lines') | list }}"
       when: gen_cert_req is defined
 
     - name: Создаем файл расширений (extensions) сертификата, для пользователя домена
@@ -298,9 +298,9 @@
       loop: "{{ token }}"
       register: gen_cert_users
 
-    - debug:                                                                   
-        msg:                                                                   
-          - "{{ gen_cert_users.results | map(attribute='cmd') | list }}"         
+    - debug:
+        msg:
+          - "{{ gen_cert_users.results | map(attribute='cmd') | list }}"
           - "{{ gen_cert_users.results | map(attribute='stderr_lines') | list }}"
       when: gen_cert_users is defined
 
@@ -328,9 +328,9 @@
         -outform PEM -out demoCA/private/ocsp-key.pem
       register: reg
 
-    - ansible.builtin.debug:                                                   
-        msg:                                                                   
-          - "register.cmd: {{ reg.cmd }}"                                      
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ reg.cmd }}"
           - "{{ reg.stderr_lines }}"
 
     - name: Создаем файл расширений (extensions) сертификата службы OCSP
@@ -354,9 +354,9 @@
         -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN={{ ocsp_srv_shortname }}.{{ domain }}"
       register: reg
 
-    - ansible.builtin.debug:                                                   
-        msg:                                                                   
-          - "register.cmd: {{ reg.cmd }}"                                      
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ reg.cmd }}"
           - "{{ reg.stderr_lines }}"
 
 
@@ -367,9 +367,9 @@
         -extfile demoCA/{{ extension_file_ocsp }} -extensions ocsp
       register: reg
 
-    - ansible.builtin.debug:                                                   
-        msg:                                                                   
-          - "register.cmd: {{ reg.cmd }}"                                      
+    - ansible.builtin.debug:
+        msg:
+          - "register.cmd: {{ reg.cmd }}"
           - "{{ reg.stderr_lines }}"
 
 
@@ -378,7 +378,7 @@
       ansible.builtin.file:
         path: /var/lib/samba/private/tls/
         state: absent
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
 
@@ -387,7 +387,7 @@
       ansible.builtin.file:
         path: /var/lib/samba/private/tls
         state: directory
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
     - name: Copy CA cert to samba
@@ -396,7 +396,7 @@
         src: demoCA/certs/cacert.pem
         dest: /var/lib/samba/private/tls/cacert.pem
         remote_src: yes
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
     - name: Copy DC key to samba
@@ -406,7 +406,7 @@
         dest: /var/lib/samba/private/tls/dc-key.pem
         mode: 0600
         remote_src: yes
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
     - name: Copy DC cert to samba
@@ -415,7 +415,7 @@
         src: demoCA/certs/dc-cert.pem
         dest: /var/lib/samba/private/tls/dc-cert.pem
         remote_src: yes
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
     - name: Add TLS to smb.conf
@@ -430,7 +430,7 @@
                   tls keyfile = /var/lib/samba/private/tls/dc-key.pem
                   tls cafile = /var/lib/samba/private/tls/cacert.pem
         backup: yes
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
           #      \\ - escape character
           #      |2 - add whitespaces at start, like in block. “Yaml Block Indentation Indicator”
@@ -443,7 +443,7 @@
         state: present
         insertafter: "dns_lookup_kdc"
         line: '         pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem'
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
     - name: Add pkinit to kerberos on samba AD 2
@@ -460,7 +460,7 @@
           pkinit_principal_in_certificate = yes
           pkinit_win2k_require_binding = yes
         backup: yes
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
     - name: Reload Samba after edit krb5.conf.
@@ -469,47 +469,47 @@
         state: restarted
         daemon_reload: yes
         name: samba.service
-      register: reg                                                            
+      register: reg
     - debug: "var=reg"
 
 
-    - name: Check Samba AD user exist                                          
-      become: yes                                                              
-      ansible.builtin.shell: samba-tool user list                              
-      register: reg                                                            
-                                                                               
-    - debug:                                                                   
-        msg:                                                                   
-          - "register.cmd: {{ reg.cmd }}"                                      
-          - "{{ reg.stdout_lines }}"                                           
-          - "{{ reg.stdout }}"                                                 
-                                                                               
-                                                                               
-    - name: Delete Samba AD user if it exist                                   
-      become: yes                                                              
-      ansible.builtin.shell: >                                                 
-        samba-tool user delete {{ item.smb_user }}                             
-      when: item.smb_user in reg.stdout                                        
-      loop: "{{ token }}"                                                      
-      register: reg2                                                           
-                                                                               
-    - name: Debug Delete Samba AD user if it exist                             
-      debug:                                                                   
-        msg:                                                                   
-          - "{{ reg2.results | map(attribute='cmd') | list }}"                 
-          - "{{ reg2.results | map(attribute='stdout_lines') | list }}"        
-      when: reg2 is defined                                                    
-                                                                               
-                                                                               
-    - name: Create Samba AD user                                               
-      become: yes                                                              
-      ansible.builtin.shell: >                                                 
-         samba-tool user create {{ item.smb_user }} {{ smb_user_pass }}        
-         --given-name={{ item.name }}                                          
-      loop: "{{ token }}"                                                      
-      register: reg                                                            
-                                                                               
-    - debug:                                                                   
-        msg:                                                                   
-          - "{{ reg.results | map(attribute='cmd') | list }}"                  
+    - name: Check Samba AD user exist
+      become: yes
+      ansible.builtin.shell: samba-tool user list
+      register: reg
+
+    - debug:
+        msg:
+          - "register.cmd: {{ reg.cmd }}"
+          - "{{ reg.stdout_lines }}"
+          - "{{ reg.stdout }}"
+
+
+    - name: Delete Samba AD user if it exist
+      become: yes
+      ansible.builtin.shell: >
+        samba-tool user delete {{ item.smb_user }}
+      when: item.smb_user in reg.stdout
+      loop: "{{ token }}"
+      register: reg2
+
+    - name: Debug Delete Samba AD user if it exist
+      debug:
+        msg:
+          - "{{ reg2.results | map(attribute='cmd') | list }}"
+          - "{{ reg2.results | map(attribute='stdout_lines') | list }}"
+      when: reg2 is defined
+
+
+    - name: Create Samba AD user
+      become: yes
+      ansible.builtin.shell: >
+         samba-tool user create {{ item.smb_user }} {{ smb_user_pass }}
+         --given-name={{ item.name }}
+      loop: "{{ token }}"
+      register: reg
+
+    - debug:
+        msg:
+          - "{{ reg.results | map(attribute='cmd') | list }}"
           - "{{ reg.results | map(attribute='stdout_lines') | list }}"

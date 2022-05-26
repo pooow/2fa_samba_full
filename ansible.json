@@ -1,0 +1,2167 @@
+2022-05-16 10:55:38,864 p=14022 u=bk n=ansible | PLAY [Prepare for Ansible] ***************************************************************************************
+2022-05-16 10:55:38,874 p=14022 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 10:55:41,782 p=14022 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.231 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 10:55:41,782 p=14022 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 10:55:42,089 p=14022 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.233 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 10:55:42,089 p=14022 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 10:55:42,098 p=14022 u=bk n=ansible | TASK [debug _variable_params=msg = "Host is {{ ansible_fqdn }}"] *************************************************
+2022-05-16 10:55:42,126 p=14022 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": "Hello world!"
+}
+2022-05-16 10:55:42,139 p=14022 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": "Hello world!"
+}
+2022-05-16 10:55:42,147 p=14022 u=bk n=ansible | TASK [Edit /etc/sudoers path=/etc/sudoers, insertafter=# WHEEL_USERS ALL=\(ALL\) NOPASSWD: ALL, line={{ username }} ALL=(ALL) NOPASSWD: ALL] ***
+2022-05-16 10:55:43,000 p=14022 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 10:55:43,006 p=14022 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 10:55:43,009 p=14022 u=bk n=ansible | PLAY [Установка и настройка ПО для работы с токенами. На сервере и на клиенте.] **********************************
+2022-05-16 10:55:43,019 p=14022 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 10:55:44,767 p=14022 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 10:55:45,402 p=14022 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 10:55:45,410 p=14022 u=bk n=ansible | TASK [install pkg for tokens pkg=['opensc', 'librtpkcs11ecp', 'libjcpkcs11', 'isbc-pkcs11', 'pcsc-lite', 'pcsc-tools', 'gnutls-utils', 'libp11', 'libp11-kit', 'color-prompt-and-man'], state=present, update_cache=True] ***
+2022-05-16 10:57:10,448 p=14022 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 10:57:15,214 p=14022 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 10:57:15,223 p=14022 u=bk n=ansible | TASK [Polkit permit pcsc for all. Attention on colon in stdout. Use quote the entire line. path=/usr/share/polkit-1/actions/org.debian.pcsc-lite.policy, regexp=>no<, replace=>yes<, backup=True] ***
+2022-05-16 10:57:16,080 p=14022 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 10:57:16,125 p=14022 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 10:57:16,135 p=14022 u=bk n=ansible | TASK [Enable pcscd.socket state=started, name=pcscd.socket] ******************************************************
+2022-05-16 10:57:17,173 p=14022 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 10:57:17,178 p=14022 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 10:57:17,189 p=14022 u=bk n=ansible | TASK [Check polkit for pcsc _raw_params=pcsc_scan -r] ************************************************************
+2022-05-16 10:57:18,698 p=14022 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 10:59:32,059 p=14022 u=bk n=ansible |  [ERROR]: User interrupted execution
+
+2022-05-16 11:06:23,366 p=16114 u=bk n=ansible | PLAY [Prepare for Ansible] ***************************************************************************************
+2022-05-16 11:06:23,376 p=16114 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 11:06:26,372 p=16114 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.231 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 11:06:26,372 p=16114 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:06:26,845 p=16114 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.233 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 11:06:26,845 p=16114 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:06:26,854 p=16114 u=bk n=ansible | TASK [debug _variable_params=msg = "Host is {{ ansible_fqdn }}"] *************************************************
+2022-05-16 11:06:26,883 p=16114 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": "Hello world!"
+}
+2022-05-16 11:06:26,894 p=16114 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": "Hello world!"
+}
+2022-05-16 11:06:26,903 p=16114 u=bk n=ansible | TASK [Edit /etc/sudoers path=/etc/sudoers, insertafter=# WHEEL_USERS ALL=\(ALL\) NOPASSWD: ALL, line={{ username }} ALL=(ALL) NOPASSWD: ALL] ***
+2022-05-16 11:06:27,720 p=16114 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:06:27,750 p=16114 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:06:27,753 p=16114 u=bk n=ansible | PLAY [Установка и настройка ПО для работы с токенами. На сервере и на клиенте.] **********************************
+2022-05-16 11:06:27,763 p=16114 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 11:06:29,537 p=16114 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:06:30,131 p=16114 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:06:30,140 p=16114 u=bk n=ansible | TASK [install pkg for tokens pkg=['opensc', 'librtpkcs11ecp', 'libjcpkcs11', 'isbc-pkcs11', 'pcsc-lite', 'pcsc-tools', 'gnutls-utils', 'libp11', 'libp11-kit', 'color-prompt-and-man'], state=present, update_cache=True] ***
+2022-05-16 11:06:55,840 p=16114 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:07:48,640 p=16114 u=bk n=ansible | fatal: [10.33.33.233]: FAILED! => {"changed": false, "msg": "'apt-get -y install color-prompt-and-man' failed: Невозможно получить http://update.altsp.su/pub/distributions/ALTLinux/CF2/branch/x86_64/RPMS.classic/librtpkcs11ecp-2.3.0.0-alt1.x86_64.rpm  504 Gateway Time-out\nE: Получить некоторые архивы невозможно. Попробуйте ввести команду apt-get update или добавить параметр --fix-missing.\n"}
+2022-05-16 11:07:48,649 p=16114 u=bk n=ansible | TASK [Polkit permit pcsc for all. Attention on colon in stdout. Use quote the entire line. path=/usr/share/polkit-1/actions/org.debian.pcsc-lite.policy, regexp=>no<, replace=>yes<, backup=True] ***
+2022-05-16 11:07:49,545 p=16114 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:07:49,554 p=16114 u=bk n=ansible | TASK [Enable pcscd.socket state=started, name=pcscd.socket] ******************************************************
+2022-05-16 11:07:50,584 p=16114 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:07:50,593 p=16114 u=bk n=ansible | TASK [Check polkit for pcsc _raw_params=pcsc_scan -r] ************************************************************
+2022-05-16 11:07:51,587 p=16114 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:07:51,596 p=16114 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:07:51,629 p=16114 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": [
+        "register.cmd: pcsc_scan -r",
+        [
+            "\u001b[35mUsing reader plug'n play mechanism\u001b[0m",
+            "\u001b[31mScanning present readers...\u001b[0m",
+            "\u001b[34m0: Aktiv Rutoken ECP 00 00\u001b[0m"
+        ]
+    ]
+}
+2022-05-16 11:07:51,639 p=16114 u=bk n=ansible | TASK [Check that the /usr/lib64/libjckt2.so (JC GOST slot) exist path=/usr/lib64/pkcs11/libjckt2.so] *************
+2022-05-16 11:07:52,362 p=16114 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:07:52,371 p=16114 u=bk n=ansible | TASK [Create the file, if it doesnt exist already src=/usr/lib64/libjckt2.so, dest=/usr/lib64/pkcs11/libjckt2.so, state=link] ***
+2022-05-16 11:07:53,109 p=16114 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:07:53,119 p=16114 u=bk n=ansible | TASK [Test p11-kit-proxy.so _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T] *********************
+2022-05-16 11:07:56,104 p=16114 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:07:56,115 p=16114 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:07:56,148 p=16114 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": [
+        "register.cmd: pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T",
+        [
+            "Available slots:",
+            "Slot 0 (0x30): Aktiv Rutoken ECP 00 00",
+            "  token label        : RutokenECP2151",
+            "  token manufacturer : Aktiv Co.",
+            "  token model        : Rutoken ECP",
+            "  token flags        : login required, rng, SO PIN to be changed, token initialized, PIN initialized, user PIN to be changed",
+            "  hardware version   : 138.1",
+            "  firmware version   : 23.2",
+            "  serial num         : 3b088b41",
+            "  pin min/max        : 6/32"
+        ]
+    ]
+}
+2022-05-16 11:07:56,150 p=16114 u=bk n=ansible | PLAY RECAP *******************************************************************************************************
+2022-05-16 11:07:56,150 p=16114 u=bk n=ansible | 10.33.33.231               : ok=13   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-05-16 11:07:56,150 p=16114 u=bk n=ansible | 10.33.33.233               : ok=4    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+2022-05-16 11:12:02,832 p=17302 u=bk n=ansible | PLAY [Prepare for Ansible] ***************************************************************************************
+2022-05-16 11:12:02,842 p=17302 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 11:12:05,115 p=17302 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.231 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 11:12:05,115 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:12:05,721 p=17302 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.233 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 11:12:05,721 p=17302 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:12:05,730 p=17302 u=bk n=ansible | TASK [debug _variable_params=msg = "Host is {{ ansible_fqdn }}"] *************************************************
+2022-05-16 11:12:05,759 p=17302 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": "Hello world!"
+}
+2022-05-16 11:12:05,771 p=17302 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": "Hello world!"
+}
+2022-05-16 11:12:05,781 p=17302 u=bk n=ansible | TASK [Edit /etc/sudoers path=/etc/sudoers, insertafter=# WHEEL_USERS ALL=\(ALL\) NOPASSWD: ALL, line={{ username }} ALL=(ALL) NOPASSWD: ALL] ***
+2022-05-16 11:12:06,519 p=17302 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:12:06,538 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:12:06,541 p=17302 u=bk n=ansible | PLAY [Установка и настройка ПО для работы с токенами. На сервере и на клиенте.] **********************************
+2022-05-16 11:12:06,551 p=17302 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 11:12:08,347 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:12:08,684 p=17302 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:12:08,692 p=17302 u=bk n=ansible | TASK [install pkg for tokens pkg=['opensc', 'librtpkcs11ecp', 'libjcpkcs11', 'isbc-pkcs11', 'pcsc-lite', 'pcsc-tools', 'gnutls-utils', 'libp11', 'libp11-kit', 'color-prompt-and-man'], state=present, update_cache=True] ***
+2022-05-16 11:12:52,423 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:13:40,401 p=17302 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:13:40,410 p=17302 u=bk n=ansible | TASK [Polkit permit pcsc for all. Attention on colon in stdout. Use quote the entire line. path=/usr/share/polkit-1/actions/org.debian.pcsc-lite.policy, regexp=>no<, replace=>yes<, backup=True] ***
+2022-05-16 11:13:41,090 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:13:41,260 p=17302 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:13:41,269 p=17302 u=bk n=ansible | TASK [Enable pcscd.socket state=started, name=pcscd.socket] ******************************************************
+2022-05-16 11:13:42,231 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:13:42,245 p=17302 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:13:42,254 p=17302 u=bk n=ansible | TASK [Check polkit for pcsc _raw_params=pcsc_scan -r] ************************************************************
+2022-05-16 11:13:43,168 p=17302 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:13:43,687 p=17302 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:13:43,697 p=17302 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:13:43,727 p=17302 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: pcsc_scan -r",
+        [
+            "\u001b[35mUsing reader plug'n play mechanism\u001b[0m",
+            "\u001b[31mScanning present readers...\u001b[0m",
+            "\u001b[34m0: Aladdin R.D. JaCarta 00 00\u001b[0m",
+            "\u001b[34m1: ESMART Token GOST [ESMART Token] 01 00\u001b[0m"
+        ]
+    ]
+}
+2022-05-16 11:13:43,740 p=17302 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": [
+        "register.cmd: pcsc_scan -r",
+        [
+            "\u001b[35mUsing reader plug'n play mechanism\u001b[0m",
+            "\u001b[31mScanning present readers...\u001b[0m",
+            "\u001b[34m0: Aktiv Rutoken ECP 00 00\u001b[0m"
+        ]
+    ]
+}
+2022-05-16 11:13:43,748 p=17302 u=bk n=ansible | TASK [Check that the /usr/lib64/libjckt2.so (JC GOST slot) exist path=/usr/lib64/pkcs11/libjckt2.so] *************
+2022-05-16 11:13:44,437 p=17302 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:13:44,478 p=17302 u=bk n=ansible | ok: [10.33.33.231]
+2022-05-16 11:13:44,486 p=17302 u=bk n=ansible | TASK [Create the file, if it doesnt exist already src=/usr/lib64/libjckt2.so, dest=/usr/lib64/pkcs11/libjckt2.so, state=link] ***
+2022-05-16 11:13:44,528 p=17302 u=bk n=ansible | skipping: [10.33.33.231]
+2022-05-16 11:13:45,188 p=17302 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:13:45,197 p=17302 u=bk n=ansible | TASK [Test p11-kit-proxy.so _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T] *********************
+2022-05-16 11:13:48,206 p=17302 u=bk n=ansible | changed: [10.33.33.231]
+2022-05-16 11:13:52,753 p=17302 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:13:52,762 p=17302 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:13:52,793 p=17302 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T",
+        [
+            "Available slots:",
+            "Slot 0 (0x11): ESMART Token GOST [ESMART Token] 01 00",
+            "  token label        : esmart_64",
+            "  token manufacturer : ISBC",
+            "  token model        : ESMART Token",
+            "  token flags        : login required, rng, token initialized, PIN initialized",
+            "  hardware version   : 0.0",
+            "  firmware version   : 2.4",
+            "  serial num         : 206F6060C102",
+            "  pin min/max        : 4/8",
+            "Slot 1 (0x12): Aladdin R.D. JaCarta 00 00",
+            "  token label        : STANDART.SE",
+            "  token manufacturer : Aladdin R.D.",
+            "  token model        : JaCarta GOST 2.0",
+            "  token flags        : login required, rng, token initialized, PIN initialized, other flags=0x800",
+            "  hardware version   : 1.0",
+            "  firmware version   : 2.55",
+            "  serial num         : 6082023848937678",
+            "  pin min/max        : 6/32",
+            "Slot 2 (0x13): Aladdin R.D. JaCarta 00 00",
+            "  token label        : jacarta-slot-laser",
+            "  token manufacturer : Aladdin R.D.",
+            "  token model        : JaCarta Laser",
+            "  token flags        : login required, token initialized, PIN initialized",
+            "  hardware version   : 1.0",
+            "  firmware version   : 1.0",
+            "  serial num         : 6082023848937678",
+            "  pin min/max        : 4/10"
+        ]
+    ]
+}
+2022-05-16 11:13:52,805 p=17302 u=bk n=ansible | ok: [10.33.33.231] => {
+    "msg": [
+        "register.cmd: pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T",
+        [
+            "Available slots:",
+            "Slot 0 (0x30): Aktiv Rutoken ECP 00 00",
+            "  token label        : RutokenECP2151",
+            "  token manufacturer : Aktiv Co.",
+            "  token model        : Rutoken ECP",
+            "  token flags        : login required, rng, SO PIN to be changed, token initialized, PIN initialized, user PIN to be changed",
+            "  hardware version   : 138.1",
+            "  firmware version   : 23.2",
+            "  serial num         : 3b088b41",
+            "  pin min/max        : 6/32"
+        ]
+    ]
+}
+2022-05-16 11:13:52,807 p=17302 u=bk n=ansible | PLAY RECAP *******************************************************************************************************
+2022-05-16 11:13:52,807 p=17302 u=bk n=ansible | 10.33.33.231               : ok=12   changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+2022-05-16 11:13:52,807 p=17302 u=bk n=ansible | 10.33.33.233               : ok=13   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2022-05-16 11:18:15,838 p=18761 u=bk n=ansible | PLAY [Generate CA] ***********************************************************************************************
+2022-05-16 11:18:15,849 p=18761 u=bk n=ansible | TASK [Gathering Facts gather_subset=['all'], gather_timeout=10] **************************************************
+2022-05-16 11:18:18,116 p=18761 u=bk n=ansible | [WARNING]: Platform linux on host 10.33.33.233 is using the discovered Python interpreter at /usr/bin/python, but
+future installation of another Python interpreter could change this. See
+https://docs.ansible.com/ansible/2.9/reference_appendices/interpreter_discovery.html for more information.
+
+2022-05-16 11:18:18,116 p=18761 u=bk n=ansible | ok: [10.33.33.233]
+2022-05-16 11:18:18,128 p=18761 u=bk n=ansible | TASK [Remove demoCA _raw_params=rm -rf demoCA] *******************************************************************
+2022-05-16 11:18:18,770 p=18761 u=bk n=ansible | [WARNING]: Consider using the file module with state=absent rather than running 'rm'.  If you need to use command
+because file is insufficient you can add 'warn: false' to this command task or set 'command_warnings=False' in
+ansible.cfg to get rid of this message.
+
+2022-05-16 11:18:18,770 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:18,780 p=18761 u=bk n=ansible | TASK [Create demoCA folder _raw_params=mkdir -pv demoCA/{certs,newcerts,private}] ********************************
+2022-05-16 11:18:19,321 p=18761 u=bk n=ansible | [WARNING]: Consider using the file module with state=directory rather than running 'mkdir'.  If you need to use
+command because file is insufficient you can add 'warn: false' to this command task or set
+'command_warnings=False' in ansible.cfg to get rid of this message.
+
+2022-05-16 11:18:19,321 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:19,330 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:18:19,362 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: mkdir -pv demoCA/{certs,newcerts,private}",
+        [
+            "mkdir: создан каталог 'demoCA'",
+            "mkdir: создан каталог 'demoCA/certs'",
+            "mkdir: создан каталог 'demoCA/newcerts'",
+            "mkdir: создан каталог 'demoCA/private'"
+        ]
+    ]
+}
+2022-05-16 11:18:19,372 p=18761 u=bk n=ansible | TASK [shell _raw_params=touch demoCA/index.txt] ******************************************************************
+2022-05-16 11:18:19,938 p=18761 u=bk n=ansible | [WARNING]: Consider using the file module with state=touch rather than running 'touch'.  If you need to use
+command because file is insufficient you can add 'warn: false' to this command task or set
+'command_warnings=False' in ansible.cfg to get rid of this message.
+
+2022-05-16 11:18:19,938 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:19,946 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:18:19,977 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: touch demoCA/index.txt",
+        []
+    ]
+}
+2022-05-16 11:18:19,986 p=18761 u=bk n=ansible | TASK [shell _raw_params=echo "01" > demoCA/serial] ***************************************************************
+2022-05-16 11:18:20,617 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:20,626 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:18:20,656 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: echo \"01\" > demoCA/serial",
+        []
+    ]
+}
+2022-05-16 11:18:20,666 p=18761 u=bk n=ansible | TASK [Create CA key _raw_params=openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform PEM -out demoCA/private/cakey.pem
+] ***
+2022-05-16 11:18:21,293 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:21,303 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stderr_lines }}']] ***********************
+2022-05-16 11:18:21,334 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform PEM -out demoCA/private/cakey.pem\n",
+        [
+            "...+++++",
+            "....................................................+++++"
+        ]
+    ]
+}
+2022-05-16 11:18:21,343 p=18761 u=bk n=ansible | TASK [Create CA cert _raw_params=openssl req -new -x509 -key demoCA/private/cakey.pem -out demoCA/certs/cacert.pem -extensions v3_ca -days +3650 -outform PEM -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN=CA"
+] ***
+2022-05-16 11:18:21,952 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:21,961 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stderr_lines }}']] ***********************
+2022-05-16 11:18:21,993 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: openssl req -new -x509 -key demoCA/private/cakey.pem -out demoCA/certs/cacert.pem -extensions v3_ca -days +3650 -outform PEM -subj \"/C=RU/ST=Moscow/O=TEST5.ALT/CN=CA\"\n",
+        []
+    ]
+}
+2022-05-16 11:18:22,001 p=18761 u=bk n=ansible | TASK [Create KDC key _raw_params=openssl genrsa -out demoCA/private/dc-key.pem 2048] *****************************
+2022-05-16 11:18:22,783 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:22,792 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stderr_lines }}']] ***********************
+2022-05-16 11:18:22,823 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: openssl genrsa -out demoCA/private/dc-key.pem 2048",
+        [
+            "Generating RSA private key, 2048 bit long modulus (2 primes)",
+            ".............................................................................+++++",
+            "...................................................................+++++",
+            "e is 65537 (0x010001)"
+        ]
+    ]
+}
+2022-05-16 11:18:22,833 p=18761 u=bk n=ansible | TASK [Create KDC req _raw_params=openssl req -new -out demoCA/dc-req.csr -key demoCA/private/dc-key.pem -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN={{ ad_srv_shortname }}.{{ domain }}"
+] ***
+2022-05-16 11:18:23,435 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:23,445 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stderr_lines }}']] ***********************
+2022-05-16 11:18:23,476 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: openssl req -new -out demoCA/dc-req.csr -key demoCA/private/dc-key.pem -subj \"/C=RU/ST=Moscow/O=TEST5.ALT/CN=sp8-srv-2022.test5.alt\"\n",
+        []
+    ]
+}
+2022-05-16 11:18:23,485 p=18761 u=bk n=ansible | TASK [Create (copy) extension file for KDC cert dest=demoCA/{{ extension_file_KDC }}, content=[kdc_cert]
+basicConstraints=CA:FALSE
+keyUsage=nonRepudiation,digitalSignature,keyEncipherment,keyAgreement
+extendedKeyUsage=1.3.6.1.5.2.3.5
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid,issuer
+issuerAltName=issuer:copy
+subjectAltName=otherName:1.3.6.1.5.2.2;SEQUENCE:kdc_princ_name
+authorityInfoAccess    = OCSP;URI:http://{{ ad_srv_shortname }}.{{ domain }}
+
+[kdc_princ_name]
+realm=EXP:0,GeneralString:${ENV::REALM}
+principal_name=EXP:1,SEQUENCE:kdc_principal_seq
+
+[kdc_principal_seq]
+name_type=EXP:0,INTEGER:1
+name_string=EXP:1,SEQUENCE:kdc_principals
+
+[kdc_principals]
+princ1=GeneralString:krbtgt
+princ2=GeneralString:${ENV::REALM}
+] ***
+2022-05-16 11:18:24,845 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:24,854 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['{{ out }}']] *******************************************************************
+2022-05-16 11:18:24,885 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        {
+            "changed": true,
+            "checksum": "f3fcd72c39a450cbc950555d7739c8e0839a37aa",
+            "dest": "demoCA/./cert_extension_KDC",
+            "diff": [],
+            "failed": false,
+            "gid": 500,
+            "group": "user",
+            "md5sum": "d3024ef7ea59db01c80f33fe8a8dcd81",
+            "mode": "0644",
+            "owner": "user",
+            "size": 631,
+            "src": "/home/user/.ansible/tmp/ansible-tmp-1652689103.5906773-18889-107513589410375/source",
+            "state": "file",
+            "uid": 500
+        }
+    ]
+}
+2022-05-16 11:18:24,894 p=18761 u=bk n=ansible | TASK [Create KDC cert _raw_params=env REALM={{ REALM }} openssl ca -batch -in demoCA/dc-req.csr -out demoCA/certs/dc-cert.pem -cert demoCA/certs/cacert.pem -extfile demoCA/{{ extension_file_KDC }} -extensions kdc_cert
+] ***
+2022-05-16 11:18:25,510 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:25,520 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stderr_lines }}']] ***********************
+2022-05-16 11:18:25,551 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: env REALM=TEST5.ALT openssl ca -batch -in demoCA/dc-req.csr -out demoCA/certs/dc-cert.pem -cert demoCA/certs/cacert.pem -extfile demoCA/./cert_extension_KDC -extensions kdc_cert\n",
+        [
+            "Using configuration from /var/lib/ssl/openssl.cnf",
+            "Check that the request matches the signature",
+            "Signature ok",
+            "Certificate Details:",
+            "        Serial Number: 1 (0x1)",
+            "        Validity",
+            "            Not Before: May 16 08:18:24 2022 GMT",
+            "            Not After : May 16 08:18:24 2023 GMT",
+            "        Subject:",
+            "            countryName               = RU",
+            "            stateOrProvinceName       = Moscow",
+            "            organizationName          = TEST5.ALT",
+            "            commonName                = sp8-srv-2022.test5.alt",
+            "        X509v3 extensions:",
+            "            X509v3 Basic Constraints: ",
+            "                CA:FALSE",
+            "            X509v3 Key Usage: ",
+            "                Digital Signature, Non Repudiation, Key Encipherment, Key Agreement",
+            "            X509v3 Extended Key Usage: ",
+            "                Signing KDC Response",
+            "            X509v3 Subject Key Identifier: ",
+            "                2C:B2:D8:21:D9:3D:8F:84:CA:0E:FB:00:E0:DE:86:AB:08:9C:BB:08",
+            "            X509v3 Authority Key Identifier: ",
+            "                keyid:15:79:3E:ED:9D:A2:25:BF:DB:DB:2A:0F:85:46:C5:67:95:CE:80:9A",
+            "",
+            "            X509v3 Issuer Alternative Name: ",
+            "                <EMPTY>",
+            "",
+            "            X509v3 Subject Alternative Name: ",
+            "                othername:<unsupported>",
+            "            Authority Information Access: ",
+            "                OCSP - URI:http://sp8-srv-2022.test5.alt",
+            "",
+            "Certificate is to be certified until May 16 08:18:24 2023 GMT (365 days)",
+            "",
+            "Write out database with 1 new entries",
+            "Data Base Updated"
+        ]
+    ]
+}
+2022-05-16 11:18:25,560 p=18761 u=bk n=ansible | TASK [Check tokens _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T] ******************************
+2022-05-16 11:18:32,141 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:18:32,150 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ out.cmd }}', '{{ out.stdout_lines }}']] ***********************
+2022-05-16 11:18:32,182 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -T",
+        [
+            "Available slots:",
+            "Slot 0 (0x11): ESMART Token GOST [ESMART Token] 01 00",
+            "  token label        : esmart_64",
+            "  token manufacturer : ISBC",
+            "  token model        : ESMART Token",
+            "  token flags        : login required, rng, token initialized, PIN initialized",
+            "  hardware version   : 0.0",
+            "  firmware version   : 2.4",
+            "  serial num         : 206F6060C102",
+            "  pin min/max        : 4/8",
+            "Slot 1 (0x12): Aladdin R.D. JaCarta 00 00",
+            "  token label        : STANDART.SE",
+            "  token manufacturer : Aladdin R.D.",
+            "  token model        : JaCarta GOST 2.0",
+            "  token flags        : login required, rng, token initialized, PIN initialized, other flags=0x800",
+            "  hardware version   : 1.0",
+            "  firmware version   : 2.55",
+            "  serial num         : 6082023848937678",
+            "  pin min/max        : 6/32",
+            "Slot 2 (0x13): Aladdin R.D. JaCarta 00 00",
+            "  token label        : jacarta-slot-laser",
+            "  token manufacturer : Aladdin R.D.",
+            "  token model        : JaCarta Laser",
+            "  token flags        : login required, token initialized, PIN initialized",
+            "  hardware version   : 1.0",
+            "  firmware version   : 1.0",
+            "  serial num         : 6082023848937678",
+            "  pin min/max        : 4/10",
+            "Slot 3 (0x34): Aktiv Rutoken ECP 02 00",
+            "  token label        : RutokenECP2151",
+            "  token manufacturer : Aktiv Co.",
+            "  token model        : Rutoken ECP",
+            "  token flags        : login required, rng, SO PIN to be changed, token initialized, PIN initialized, user PIN to be changed",
+            "  hardware version   : 138.1",
+            "  firmware version   : 23.2",
+            "  serial num         : 3b088b41",
+            "  pin min/max        : 6/32"
+        ]
+    ]
+}
+2022-05-16 11:18:32,190 p=18761 u=bk n=ansible | TASK [Get cert on tokens _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label {{ item.label_slot }}
+] ***
+2022-05-16 11:18:40,620 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024})
+2022-05-16 11:18:47,938 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048})
+2022-05-16 11:18:55,145 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048})
+2022-05-16 11:18:55,155 p=18761 u=bk n=ansible | TASK [debug msg=["{{ certs_on_tokens.results | map(attribute='cmd') | list }}", "{{ certs_on_tokens.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:18:55,189 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [
+                "Certificate Object; type = X.509 cert",
+                "  label:      rt_2fa_smb",
+                "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=rt_smb",
+                "  ID:         7011",
+                "Certificate Object; type = X.509 cert",
+                "  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E",
+                "  subject:    DN: DC=alt, DC=test, CN=user11/emailAddress=user11@test.alt",
+                "  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45"
+            ],
+            [
+                "Certificate Object; type = X.509 cert",
+                "  label:      esm_2fa",
+                "  subject:    DN: C=RU, ST=Moscow, O=Basealt, CN=esm/emailAddress=esm@test.alt",
+                "  ID:         0123",
+                "Certificate Object; type = X.509 cert",
+                "  label:      es_2fa_ipa",
+                "  subject:    DN: O=TEST3.ALT, CN=es",
+                "  ID:         7002",
+                "Certificate Object; type = X.509 cert",
+                "  label:      es_2fa_smb",
+                "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=es_smb",
+                "  ID:         7012"
+            ],
+            [
+                "Certificate Object; type = X.509 cert",
+                "  label:      jc_2fa_smb",
+                "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=jc_smb",
+                "  ID:         7013"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:18:55,198 p=18761 u=bk n=ansible | TASK [Get keys on tokens _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label {{ item.label_slot }}
+] ***
+2022-05-16 11:19:04,260 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024})
+2022-05-16 11:19:11,500 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048})
+2022-05-16 11:19:18,715 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048})
+2022-05-16 11:19:18,724 p=18761 u=bk n=ansible | TASK [debug msg=["{{ keys_on_tokens.results | map(attribute='cmd') | list }}", "{{ keys_on_tokens.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:19:18,758 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [
+                "Public Key Object; RSA 1024 bits",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local",
+                "Public Key Object; RSA 1024 bits",
+                "  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E",
+                "  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45",
+                "  Usage:      encrypt, verify, derive",
+                "  Access:     local"
+            ],
+            [
+                "Public Key Object; RSA 1024 bits",
+                "  label:      esm_2fa",
+                "  ID:         0123",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      es_2fa_ipa",
+                "  ID:         7002",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Public Key Object; RSA 2048 bits",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:19:18,767 p=18761 u=bk n=ansible | TASK [Delete old pub keys on rutoken _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin {{ item.0.pin }} --login --delete-object --type pubkey --id {{ item.0.id_cert }} --token-label {{ item.0.label_slot }}
+] ***
+2022-05-16 11:19:27,960 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:19:02.831329', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:54.442544', 'stderr': '', 'delta': '0:00:08.388785', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 1024 bits', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', '  Usage:      encrypt, verify, derive', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 1, 'index0': 0, 'first': True, 'last': False, 'length': 3, 'revindex': 3, 'revindex0': 2, 'nextitem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}])
+2022-05-16 11:19:36,725 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:10.073990', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:19:03.373531', 'stderr': '', 'delta': '0:00:06.700459', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      esm_2fa', '  ID:         0123', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_ipa', '  ID:         7002', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 2, 'index0': 1, 'first': False, 'last': False, 'length': 3, 'revindex': 2, 'revindex0': 1, 'nextitem': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'previtem': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}}}])
+2022-05-16 11:20:00,891 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:17.291484', 'stdout': 'Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:19:10.654014', 'stderr': '', 'delta': '0:00:06.637470', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 3, 'index0': 2, 'first': False, 'last': True, 'length': 3, 'revindex': 1, 'revindex0': 0, 'previtem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}])
+2022-05-16 11:20:00,902 p=18761 u=bk n=ansible | TASK [debug msg=["{{ del_pub_keys_on_tokens.results | map(attribute='cmd') | list }}", "{{ del_pub_keys_on_tokens.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:20:00,940 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type pubkey --id 7011 --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type pubkey --id 7012 --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type pubkey --id 7013 --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [],
+            [],
+            []
+        ]
+    ]
+}
+2022-05-16 11:20:00,949 p=18761 u=bk n=ansible | TASK [Delete old priv keys on tokens _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin {{ item.0.pin }} --login --delete-object --type privkey --id {{ item.0.id_cert }} --token-label {{ item.0.label_slot }}
+] ***
+2022-05-16 11:20:09,642 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:19:02.831329', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:54.442544', 'stderr': '', 'delta': '0:00:08.388785', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 1024 bits', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', '  Usage:      encrypt, verify, derive', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 1, 'index0': 0, 'first': True, 'last': False, 'length': 3, 'revindex': 3, 'revindex0': 2, 'nextitem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}])
+2022-05-16 11:20:18,845 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:10.073990', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:19:03.373531', 'stderr': '', 'delta': '0:00:06.700459', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      esm_2fa', '  ID:         0123', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_ipa', '  ID:         7002', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 2, 'index0': 1, 'first': False, 'last': False, 'length': 3, 'revindex': 2, 'revindex0': 1, 'nextitem': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'previtem': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}}}])
+2022-05-16 11:20:43,107 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:17.291484', 'stdout': 'Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:19:10.654014', 'stderr': '', 'delta': '0:00:06.637470', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 3, 'index0': 2, 'first': False, 'last': True, 'length': 3, 'revindex': 1, 'revindex0': 0, 'previtem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}])
+2022-05-16 11:20:43,119 p=18761 u=bk n=ansible | TASK [debug var=del_priv_keys_on_tokens] *************************************************************************
+2022-05-16 11:20:43,160 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "del_priv_keys_on_tokens": {
+        "changed": true,
+        "msg": "All items completed",
+        "results": [
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n",
+                "delta": "0:00:07.995510",
+                "end": "2022-05-16 11:20:08.213500",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n",
+                        "_uses_shell": true,
+                        "argv": null,
+                        "chdir": null,
+                        "creates": null,
+                        "executable": null,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true,
+                        "warn": true
+                    }
+                },
+                "item": [
+                    {
+                        "id_cert": 7011,
+                        "keySize": 1024,
+                        "label_cert": "rt_2fa_smb",
+                        "label_slot": "RutokenECP2151",
+                        "name": "rutoken",
+                        "pin": 12345678,
+                        "smb_user": "rt_smb"
+                    },
+                    {
+                        "ansible_loop": {
+                            "allitems": [
+                                {
+                                    "id_cert": 7011,
+                                    "keySize": 1024,
+                                    "label_cert": "rt_2fa_smb",
+                                    "label_slot": "RutokenECP2151",
+                                    "name": "rutoken",
+                                    "pin": 12345678,
+                                    "smb_user": "rt_smb"
+                                },
+                                {
+                                    "id_cert": 7012,
+                                    "keySize": 2048,
+                                    "label_cert": "es_2fa_smb",
+                                    "label_slot": "esmart_64",
+                                    "name": "esmart",
+                                    "pin": 12345678,
+                                    "smb_user": "es_smb"
+                                },
+                                {
+                                    "id_cert": 7013,
+                                    "keySize": 2048,
+                                    "label_cert": "jc_2fa_smb",
+                                    "label_slot": "jacarta-slot-laser",
+                                    "name": "jacarta",
+                                    "pin": 11111111,
+                                    "smb_user": "jc_smb"
+                                }
+                            ],
+                            "first": true,
+                            "index": 1,
+                            "index0": 0,
+                            "last": false,
+                            "length": 3,
+                            "nextitem": {
+                                "id_cert": 7012,
+                                "keySize": 2048,
+                                "label_cert": "es_2fa_smb",
+                                "label_slot": "esmart_64",
+                                "name": "esmart",
+                                "pin": 12345678,
+                                "smb_user": "es_smb"
+                            },
+                            "revindex": 3,
+                            "revindex0": 2
+                        },
+                        "ansible_loop_var": "item",
+                        "changed": true,
+                        "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n",
+                        "delta": "0:00:08.388785",
+                        "end": "2022-05-16 11:19:02.831329",
+                        "failed": false,
+                        "invocation": {
+                            "module_args": {
+                                "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n",
+                                "_uses_shell": true,
+                                "argv": null,
+                                "chdir": null,
+                                "creates": null,
+                                "executable": null,
+                                "removes": null,
+                                "stdin": null,
+                                "stdin_add_newline": true,
+                                "strip_empty_ends": true,
+                                "warn": true
+                            }
+                        },
+                        "item": {
+                            "id_cert": 7011,
+                            "keySize": 1024,
+                            "label_cert": "rt_2fa_smb",
+                            "label_slot": "RutokenECP2151",
+                            "name": "rutoken",
+                            "pin": 12345678,
+                            "smb_user": "rt_smb"
+                        },
+                        "rc": 0,
+                        "start": "2022-05-16 11:18:54.442544",
+                        "stderr": "",
+                        "stderr_lines": [],
+                        "stdout": "Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local",
+                        "stdout_lines": [
+                            "Public Key Object; RSA 1024 bits",
+                            "  label:      rt_2fa_smb",
+                            "  ID:         7011",
+                            "  Usage:      encrypt, verify, wrap",
+                            "  Access:     local",
+                            "Public Key Object; RSA 1024 bits",
+                            "  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E",
+                            "  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45",
+                            "  Usage:      encrypt, verify, derive",
+                            "  Access:     local"
+                        ]
+                    }
+                ],
+                "rc": 0,
+                "start": "2022-05-16 11:20:00.217990",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "",
+                "stdout_lines": []
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n",
+                "delta": "0:00:08.626333",
+                "end": "2022-05-16 11:20:17.415619",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n",
+                        "_uses_shell": true,
+                        "argv": null,
+                        "chdir": null,
+                        "creates": null,
+                        "executable": null,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true,
+                        "warn": true
+                    }
+                },
+                "item": [
+                    {
+                        "id_cert": 7012,
+                        "keySize": 2048,
+                        "label_cert": "es_2fa_smb",
+                        "label_slot": "esmart_64",
+                        "name": "esmart",
+                        "pin": 12345678,
+                        "smb_user": "es_smb"
+                    },
+                    {
+                        "ansible_loop": {
+                            "allitems": [
+                                {
+                                    "id_cert": 7011,
+                                    "keySize": 1024,
+                                    "label_cert": "rt_2fa_smb",
+                                    "label_slot": "RutokenECP2151",
+                                    "name": "rutoken",
+                                    "pin": 12345678,
+                                    "smb_user": "rt_smb"
+                                },
+                                {
+                                    "id_cert": 7012,
+                                    "keySize": 2048,
+                                    "label_cert": "es_2fa_smb",
+                                    "label_slot": "esmart_64",
+                                    "name": "esmart",
+                                    "pin": 12345678,
+                                    "smb_user": "es_smb"
+                                },
+                                {
+                                    "id_cert": 7013,
+                                    "keySize": 2048,
+                                    "label_cert": "jc_2fa_smb",
+                                    "label_slot": "jacarta-slot-laser",
+                                    "name": "jacarta",
+                                    "pin": 11111111,
+                                    "smb_user": "jc_smb"
+                                }
+                            ],
+                            "first": false,
+                            "index": 2,
+                            "index0": 1,
+                            "last": false,
+                            "length": 3,
+                            "nextitem": {
+                                "id_cert": 7013,
+                                "keySize": 2048,
+                                "label_cert": "jc_2fa_smb",
+                                "label_slot": "jacarta-slot-laser",
+                                "name": "jacarta",
+                                "pin": 11111111,
+                                "smb_user": "jc_smb"
+                            },
+                            "previtem": {
+                                "id_cert": 7011,
+                                "keySize": 1024,
+                                "label_cert": "rt_2fa_smb",
+                                "label_slot": "RutokenECP2151",
+                                "name": "rutoken",
+                                "pin": 12345678,
+                                "smb_user": "rt_smb"
+                            },
+                            "revindex": 2,
+                            "revindex0": 1
+                        },
+                        "ansible_loop_var": "item",
+                        "changed": true,
+                        "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n",
+                        "delta": "0:00:06.700459",
+                        "end": "2022-05-16 11:19:10.073990",
+                        "failed": false,
+                        "invocation": {
+                            "module_args": {
+                                "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n",
+                                "_uses_shell": true,
+                                "argv": null,
+                                "chdir": null,
+                                "creates": null,
+                                "executable": null,
+                                "removes": null,
+                                "stdin": null,
+                                "stdin_add_newline": true,
+                                "strip_empty_ends": true,
+                                "warn": true
+                            }
+                        },
+                        "item": {
+                            "id_cert": 7012,
+                            "keySize": 2048,
+                            "label_cert": "es_2fa_smb",
+                            "label_slot": "esmart_64",
+                            "name": "esmart",
+                            "pin": 12345678,
+                            "smb_user": "es_smb"
+                        },
+                        "rc": 0,
+                        "start": "2022-05-16 11:19:03.373531",
+                        "stderr": "",
+                        "stderr_lines": [],
+                        "stdout": "Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local",
+                        "stdout_lines": [
+                            "Public Key Object; RSA 1024 bits",
+                            "  label:      esm_2fa",
+                            "  ID:         0123",
+                            "  Usage:      encrypt, verify, wrap",
+                            "  Access:     local",
+                            "Public Key Object; RSA 2048 bits",
+                            "  label:      es_2fa_ipa",
+                            "  ID:         7002",
+                            "  Usage:      encrypt, verify, wrap",
+                            "  Access:     local",
+                            "Public Key Object; RSA 2048 bits",
+                            "  label:      es_2fa_smb",
+                            "  ID:         7012",
+                            "  Usage:      encrypt, verify, wrap",
+                            "  Access:     local"
+                        ]
+                    }
+                ],
+                "rc": 0,
+                "start": "2022-05-16 11:20:08.789286",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "",
+                "stdout_lines": []
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n",
+                "delta": "0:00:23.654261",
+                "end": "2022-05-16 11:20:41.674459",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n",
+                        "_uses_shell": true,
+                        "argv": null,
+                        "chdir": null,
+                        "creates": null,
+                        "executable": null,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true,
+                        "warn": true
+                    }
+                },
+                "item": [
+                    {
+                        "id_cert": 7013,
+                        "keySize": 2048,
+                        "label_cert": "jc_2fa_smb",
+                        "label_slot": "jacarta-slot-laser",
+                        "name": "jacarta",
+                        "pin": 11111111,
+                        "smb_user": "jc_smb"
+                    },
+                    {
+                        "ansible_loop": {
+                            "allitems": [
+                                {
+                                    "id_cert": 7011,
+                                    "keySize": 1024,
+                                    "label_cert": "rt_2fa_smb",
+                                    "label_slot": "RutokenECP2151",
+                                    "name": "rutoken",
+                                    "pin": 12345678,
+                                    "smb_user": "rt_smb"
+                                },
+                                {
+                                    "id_cert": 7012,
+                                    "keySize": 2048,
+                                    "label_cert": "es_2fa_smb",
+                                    "label_slot": "esmart_64",
+                                    "name": "esmart",
+                                    "pin": 12345678,
+                                    "smb_user": "es_smb"
+                                },
+                                {
+                                    "id_cert": 7013,
+                                    "keySize": 2048,
+                                    "label_cert": "jc_2fa_smb",
+                                    "label_slot": "jacarta-slot-laser",
+                                    "name": "jacarta",
+                                    "pin": 11111111,
+                                    "smb_user": "jc_smb"
+                                }
+                            ],
+                            "first": false,
+                            "index": 3,
+                            "index0": 2,
+                            "last": true,
+                            "length": 3,
+                            "previtem": {
+                                "id_cert": 7012,
+                                "keySize": 2048,
+                                "label_cert": "es_2fa_smb",
+                                "label_slot": "esmart_64",
+                                "name": "esmart",
+                                "pin": 12345678,
+                                "smb_user": "es_smb"
+                            },
+                            "revindex": 1,
+                            "revindex0": 0
+                        },
+                        "ansible_loop_var": "item",
+                        "changed": true,
+                        "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n",
+                        "delta": "0:00:06.637470",
+                        "end": "2022-05-16 11:19:17.291484",
+                        "failed": false,
+                        "invocation": {
+                            "module_args": {
+                                "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n",
+                                "_uses_shell": true,
+                                "argv": null,
+                                "chdir": null,
+                                "creates": null,
+                                "executable": null,
+                                "removes": null,
+                                "stdin": null,
+                                "stdin_add_newline": true,
+                                "strip_empty_ends": true,
+                                "warn": true
+                            }
+                        },
+                        "item": {
+                            "id_cert": 7013,
+                            "keySize": 2048,
+                            "label_cert": "jc_2fa_smb",
+                            "label_slot": "jacarta-slot-laser",
+                            "name": "jacarta",
+                            "pin": 11111111,
+                            "smb_user": "jc_smb"
+                        },
+                        "rc": 0,
+                        "start": "2022-05-16 11:19:10.654014",
+                        "stderr": "",
+                        "stderr_lines": [],
+                        "stdout": "Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local",
+                        "stdout_lines": [
+                            "Public Key Object; RSA 2048 bits",
+                            "  label:      jc_2fa_smb",
+                            "  ID:         7013",
+                            "  Usage:      encrypt, verify, wrap",
+                            "  Access:     local"
+                        ]
+                    }
+                ],
+                "rc": 0,
+                "start": "2022-05-16 11:20:18.020198",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "",
+                "stdout_lines": []
+            }
+        ]
+    }
+}
+2022-05-16 11:20:43,169 p=18761 u=bk n=ansible | TASK [debug msg=["{{ del_priv_keys_on_tokens.results | map(attribute='cmd') | list }}", "{{ del_priv_keys_on_tokens.results | map(attribute='stdout_lines') | list }}", "item.skipped is: {{ del_priv_keys_on_tokens.results | map(attribute='skipped') | list }}", "item.changed is: {{ del_priv_keys_on_tokens.results | map(attribute='changed') | list }}"]] ***
+2022-05-16 11:20:43,212 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [],
+            [],
+            []
+        ],
+        "item.skipped is: [AnsibleUndefined, AnsibleUndefined, AnsibleUndefined]",
+        "item.changed is: [True, True, True]"
+    ]
+}
+2022-05-16 11:20:43,221 p=18761 u=bk n=ansible | TASK [Generate keys for users on tokens _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.0.pin }} -l --keypairgen --key-type rsa:{{ item.0.keySize }} --id {{ item.0.id_cert }} --label {{ item.0.label_cert }} --token-label {{ item.0.label_slot }}
+] ***
+2022-05-16 11:21:07,444 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:19:02.831329', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:54.442544', 'stderr': '', 'delta': '0:00:08.388785', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 1024 bits', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', '  Usage:      encrypt, verify, derive', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 1, 'index0': 0, 'first': True, 'last': False, 'length': 3, 'revindex': 3, 'revindex0': 2, 'nextitem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}, {'changed': True, 'end': '2022-05-16 11:20:08.213500', 'stdout': '', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:20:00.217990', 'stderr': '', 'delta': '0:00:07.995510', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': [], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:19:02.831329', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:54.442544', 'stderr': '', 'delta': '0:00:08.388785', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 1024 bits', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', '  Usage:      encrypt, verify, derive', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 1, 'index0': 0, 'first': True, 'last': False, 'length': 3, 'revindex': 3, 'revindex0': 2, 'nextitem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}], 'ansible_loop_var': 'item'}])
+2022-05-16 11:21:25,954 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:10.073990', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:19:03.373531', 'stderr': '', 'delta': '0:00:06.700459', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      esm_2fa', '  ID:         0123', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_ipa', '  ID:         7002', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 2, 'index0': 1, 'first': False, 'last': False, 'length': 3, 'revindex': 2, 'revindex0': 1, 'nextitem': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'previtem': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}}}, {'changed': True, 'end': '2022-05-16 11:20:17.415619', 'stdout': '', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:20:08.789286', 'stderr': '', 'delta': '0:00:08.626333', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': [], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:10.073990', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:19:03.373531', 'stderr': '', 'delta': '0:00:06.700459', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      esm_2fa', '  ID:         0123', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_ipa', '  ID:         7002', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 2, 'index0': 1, 'first': False, 'last': False, 'length': 3, 'revindex': 2, 'revindex0': 1, 'nextitem': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'previtem': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}}}], 'ansible_loop_var': 'item'}])
+2022-05-16 11:22:50,109 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:17.291484', 'stdout': 'Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:19:10.654014', 'stderr': '', 'delta': '0:00:06.637470', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 3, 'index0': 2, 'first': False, 'last': True, 'length': 3, 'revindex': 1, 'revindex0': 0, 'previtem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}, {'changed': True, 'end': '2022-05-16 11:20:41.674459', 'stdout': '', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:20:18.020198', 'stderr': '', 'delta': '0:00:23.654261', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': [], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:17.291484', 'stdout': 'Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:19:10.654014', 'stderr': '', 'delta': '0:00:06.637470', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 3, 'index0': 2, 'first': False, 'last': True, 'length': 3, 'revindex': 1, 'revindex0': 0, 'previtem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}], 'ansible_loop_var': 'item'}])
+2022-05-16 11:22:50,148 p=18761 u=bk n=ansible | TASK [debug msg=["{{ gen_keys.results | map(attribute='cmd') | list }}", "{{ gen_keys.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:22:50,213 p=18761 u=bk n=ansible | ok: [10.33.33.233] => (item={'changed': True, 'end': '2022-05-16 11:21:06.009695', 'stdout': 'Key pair generated:\nPrivate Key Object; RSA \n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      decrypt, sign, unwrap\n  Access:     sensitive, always sensitive, never extractable, local\nPublic Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:1024 --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:20:42.484622', 'stderr': '', 'delta': '0:00:23.525073', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:1024 --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Key pair generated:', 'Private Key Object; RSA ', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      decrypt, sign, unwrap', '  Access:     sensitive, always sensitive, never extractable, local', 'Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:19:02.831329', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:54.442544', 'stderr': '', 'delta': '0:00:08.388785', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 1024 bits', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', '  Usage:      encrypt, verify, derive', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 1, 'index0': 0, 'first': True, 'last': False, 'length': 3, 'revindex': 3, 'revindex0': 2, 'nextitem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}, {'changed': True, 'end': '2022-05-16 11:20:08.213500', 'stdout': '', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:20:00.217990', 'stderr': '', 'delta': '0:00:07.995510', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7011 --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': [], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:19:02.831329', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      rt_2fa_smb\n  ID:         7011\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 1024 bits\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45\n  Usage:      encrypt, verify, derive\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:54.442544', 'stderr': '', 'delta': '0:00:08.388785', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      rt_2fa_smb', '  ID:         7011', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 1024 bits', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', '  Usage:      encrypt, verify, derive', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 1, 'index0': 0, 'first': True, 'last': False, 'length': 3, 'revindex': 3, 'revindex0': 2, 'nextitem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}], 'ansible_loop_var': 'item'}], 'ansible_loop_var': 'item'}) => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:1024 --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:2048 --id 7012 --label es_2fa_smb --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --keypairgen --key-type rsa:2048 --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 1024 bits",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:22:50,231 p=18761 u=bk n=ansible | ok: [10.33.33.233] => (item={'changed': True, 'end': '2022-05-16 11:21:24.527160', 'stdout': 'Key pair generated:\nPrivate Key Object; RSA \n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      decrypt, sign, unwrap\n  Access:     sensitive, always sensitive, never extractable, local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:2048 --id 7012 --label es_2fa_smb --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:21:06.598803', 'stderr': '', 'delta': '0:00:17.928357', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:2048 --id 7012 --label es_2fa_smb --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Key pair generated:', 'Private Key Object; RSA ', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      decrypt, sign, unwrap', '  Access:     sensitive, always sensitive, never extractable, local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:10.073990', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:19:03.373531', 'stderr': '', 'delta': '0:00:06.700459', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      esm_2fa', '  ID:         0123', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_ipa', '  ID:         7002', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 2, 'index0': 1, 'first': False, 'last': False, 'length': 3, 'revindex': 2, 'revindex0': 1, 'nextitem': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'previtem': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}}}, {'changed': True, 'end': '2022-05-16 11:20:17.415619', 'stdout': '', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:20:08.789286', 'stderr': '', 'delta': '0:00:08.626333', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 12345678 --login --delete-object --type privkey --id 7012 --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': [], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:10.073990', 'stdout': 'Public Key Object; RSA 1024 bits\n  label:      esm_2fa\n  ID:         0123\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_ipa\n  ID:         7002\n  Usage:      encrypt, verify, wrap\n  Access:     local\nPublic Key Object; RSA 2048 bits\n  label:      es_2fa_smb\n  ID:         7012\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:19:03.373531', 'stderr': '', 'delta': '0:00:06.700459', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 1024 bits', '  label:      esm_2fa', '  ID:         0123', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_ipa', '  ID:         7002', '  Usage:      encrypt, verify, wrap', '  Access:     local', 'Public Key Object; RSA 2048 bits', '  label:      es_2fa_smb', '  ID:         7012', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 2, 'index0': 1, 'first': False, 'last': False, 'length': 3, 'revindex': 2, 'revindex0': 1, 'nextitem': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'previtem': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}}}], 'ansible_loop_var': 'item'}], 'ansible_loop_var': 'item'}) => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:1024 --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:2048 --id 7012 --label es_2fa_smb --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --keypairgen --key-type rsa:2048 --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 1024 bits",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:22:50,276 p=18761 u=bk n=ansible | ok: [10.33.33.233] => (item={'changed': True, 'end': '2022-05-16 11:22:48.678959', 'stdout': 'Key pair generated:\nPrivate Key Object; RSA \n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      decrypt, sign, unwrap\n  Access:     sensitive, always sensitive, never extractable, local\nPublic Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --keypairgen --key-type rsa:2048 --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:21:25.143069', 'stderr': 'warning: PKCS11 function C_GetAttributeValue(ALWAYS_AUTHENTICATE) failed: rv = CKR_ATTRIBUTE_TYPE_INVALID (0x12)', 'delta': '0:01:23.535890', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --keypairgen --key-type rsa:2048 --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Key pair generated:', 'Private Key Object; RSA ', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      decrypt, sign, unwrap', '  Access:     sensitive, always sensitive, never extractable, local', 'Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': ['warning: PKCS11 function C_GetAttributeValue(ALWAYS_AUTHENTICATE) failed: rv = CKR_ATTRIBUTE_TYPE_INVALID (0x12)'], 'failed': False, 'item': [{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:17.291484', 'stdout': 'Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:19:10.654014', 'stderr': '', 'delta': '0:00:06.637470', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 3, 'index0': 2, 'first': False, 'last': True, 'length': 3, 'revindex': 1, 'revindex0': 0, 'previtem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}, {'changed': True, 'end': '2022-05-16 11:20:41.674459', 'stdout': '', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:20:18.020198', 'stderr': '', 'delta': '0:00:23.654261', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --pin 11111111 --login --delete-object --type privkey --id 7013 --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': [], 'stderr_lines': [], 'failed': False, 'item': [{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:19:17.291484', 'stdout': 'Public Key Object; RSA 2048 bits\n  label:      jc_2fa_smb\n  ID:         7013\n  Usage:      encrypt, verify, wrap\n  Access:     local', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:19:10.654014', 'stderr': '', 'delta': '0:00:06.637470', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type pubkey --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Public Key Object; RSA 2048 bits', '  label:      jc_2fa_smb', '  ID:         7013', '  Usage:      encrypt, verify, wrap', '  Access:     local'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item', 'ansible_loop': {'allitems': [{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}], 'index': 3, 'index0': 2, 'first': False, 'last': True, 'length': 3, 'revindex': 1, 'revindex0': 0, 'previtem': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}}}], 'ansible_loop_var': 'item'}], 'ansible_loop_var': 'item'}) => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:1024 --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --keypairgen --key-type rsa:2048 --id 7012 --label es_2fa_smb --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --keypairgen --key-type rsa:2048 --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 1024 bits",
+                "  label:      rt_2fa_smb",
+                "  ID:         7011",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      es_2fa_smb",
+                "  ID:         7012",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ],
+            [
+                "Key pair generated:",
+                "Private Key Object; RSA ",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      decrypt, sign, unwrap",
+                "  Access:     sensitive, always sensitive, never extractable, local",
+                "Public Key Object; RSA 2048 bits",
+                "  label:      jc_2fa_smb",
+                "  ID:         7013",
+                "  Usage:      encrypt, verify, wrap",
+                "  Access:     local"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:22:50,291 p=18761 u=bk n=ansible | TASK [Delete old cert with label match _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.0.pin }} -l --delete-object --type cert --id {{ item.0.id_cert }} --token-label {{ item.0.label_slot }}
+] ***
+2022-05-16 11:22:58,509 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, {'changed': True, 'end': '2022-05-16 11:18:39.197202', 'stdout': 'Certificate Object; type = X.509 cert\n  label:      rt_2fa_smb\n  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=rt_smb\n  ID:         7011\nCertificate Object; type = X.509 cert\n  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E\n  subject:    DN: DC=alt, DC=test, CN=user11/emailAddress=user11@test.alt\n  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label RutokenECP2151\n', 'rc': 0, 'start': '2022-05-16 11:18:31.422948', 'stderr': '', 'delta': '0:00:07.774254', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label RutokenECP2151\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Certificate Object; type = X.509 cert', '  label:      rt_2fa_smb', '  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=rt_smb', '  ID:         7011', 'Certificate Object; type = X.509 cert', '  label:      le-rutoken1024-31a6f148-1612-4835-a9be-2735d2007c4b_E', '  subject:    DN: DC=alt, DC=test, CN=user11/emailAddress=user11@test.alt', '  ID:         6c652d7275746f6b656e313032342d33316136663134382d313631322d343833352d613962652d3237333564323030376334625f45'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}, 'ansible_loop_var': 'item'}])
+2022-05-16 11:23:08,605 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:18:46.516037', 'stdout': 'Certificate Object; type = X.509 cert\n  label:      esm_2fa\n  subject:    DN: C=RU, ST=Moscow, O=Basealt, CN=esm/emailAddress=esm@test.alt\n  ID:         0123\nCertificate Object; type = X.509 cert\n  label:      es_2fa_ipa\n  subject:    DN: O=TEST3.ALT, CN=es\n  ID:         7002\nCertificate Object; type = X.509 cert\n  label:      es_2fa_smb\n  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=es_smb\n  ID:         7012', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label esmart_64\n', 'rc': 0, 'start': '2022-05-16 11:18:39.758048', 'stderr': '', 'delta': '0:00:06.757989', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label esmart_64\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Certificate Object; type = X.509 cert', '  label:      esm_2fa', '  subject:    DN: C=RU, ST=Moscow, O=Basealt, CN=esm/emailAddress=esm@test.alt', '  ID:         0123', 'Certificate Object; type = X.509 cert', '  label:      es_2fa_ipa', '  subject:    DN: O=TEST3.ALT, CN=es', '  ID:         7002', 'Certificate Object; type = X.509 cert', '  label:      es_2fa_smb', '  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=es_smb', '  ID:         7012'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}, 'ansible_loop_var': 'item'}])
+2022-05-16 11:23:25,041 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item=[{'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, {'changed': True, 'end': '2022-05-16 11:18:53.726635', 'stdout': 'Certificate Object; type = X.509 cert\n  label:      jc_2fa_smb\n  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=jc_smb\n  ID:         7013', 'cmd': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label jacarta-slot-laser\n', 'rc': 0, 'start': '2022-05-16 11:18:47.056519', 'stderr': '', 'delta': '0:00:06.670116', 'invocation': {'module_args': {'creates': None, 'executable': None, '_uses_shell': True, 'strip_empty_ends': True, '_raw_params': 'pkcs11-tool --module /usr/lib64/p11-kit-proxy.so --list-object --type cert --token-label jacarta-slot-laser\n', 'removes': None, 'argv': None, 'warn': True, 'chdir': None, 'stdin_add_newline': True, 'stdin': None}}, 'stdout_lines': ['Certificate Object; type = X.509 cert', '  label:      jc_2fa_smb', '  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=jc_smb', '  ID:         7013'], 'stderr_lines': [], 'failed': False, 'item': {'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}, 'ansible_loop_var': 'item'}])
+2022-05-16 11:23:25,052 p=18761 u=bk n=ansible | TASK [debug msg=["{{ reg.results | map(attribute='cmd') | list }}", "{{ reg.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:23:25,089 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --delete-object --type cert --id 7011 --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --delete-object --type cert --id 7012 --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --delete-object --type cert --id 7013 --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [],
+            [],
+            []
+        ]
+    ]
+}
+2022-05-16 11:23:25,098 p=18761 u=bk n=ansible | TASK [Create request cert for users _raw_params=openssl req -new -out demoCA/{{ item.smb_user }}.csr -keyform engine -engine pkcs11 -key "pkcs11:token={{ item.label_slot }};object={{ item.label_cert }}" -passin pass:{{ item.pin }} -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN={{ item.smb_user }}"
+] ***
+2022-05-16 11:23:34,940 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024})
+2022-05-16 11:23:45,227 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048})
+2022-05-16 11:23:53,981 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048})
+2022-05-16 11:23:53,991 p=18761 u=bk n=ansible | TASK [debug msg=["{{ gen_cert_req.results | map(attribute='cmd') | list }}", "{{ gen_cert_req.results | map(attribute='stderr_lines') | list }}"]] ***
+2022-05-16 11:23:54,029 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "openssl req -new -out demoCA/rt_smb.csr -keyform engine -engine pkcs11 -key \"pkcs11:token=RutokenECP2151;object=rt_2fa_smb\" -passin pass:12345678 -subj \"/C=RU/ST=Moscow/O=TEST5.ALT/CN=rt_smb\"\n",
+            "openssl req -new -out demoCA/es_smb.csr -keyform engine -engine pkcs11 -key \"pkcs11:token=esmart_64;object=es_2fa_smb\" -passin pass:12345678 -subj \"/C=RU/ST=Moscow/O=TEST5.ALT/CN=es_smb\"\n",
+            "openssl req -new -out demoCA/jc_smb.csr -keyform engine -engine pkcs11 -key \"pkcs11:token=jacarta-slot-laser;object=jc_2fa_smb\" -passin pass:11111111 -subj \"/C=RU/ST=Moscow/O=TEST5.ALT/CN=jc_smb\"\n"
+        ],
+        [
+            [
+                "engine \"pkcs11\" set."
+            ],
+            [
+                "engine \"pkcs11\" set."
+            ],
+            [
+                "engine \"pkcs11\" set."
+            ]
+        ]
+    ]
+}
+2022-05-16 11:23:54,037 p=18761 u=bk n=ansible | TASK [Создаем файл расширений (extensions) сертификата, для пользователя домена dest=demoCA/{{ extension_file_user }}, content=[ kdc_user ]
+basicConstraints       = CA:FALSE
+keyUsage               = nonRepudiation, digitalSignature, keyEncipherment
+subjectKeyIdentifier   = hash
+authorityKeyIdentifier = keyid,issuer
+subjectAltName         = otherName:1.3.6.1.4.1.311.20.2.3;UTF8:${ENV::NAME}@${ENV::REALM}
+issuerAltName          = issuer:copy
+extendedKeyUsage       = clientAuth,1.3.6.1.4.1.311.20.2.2
+authorityInfoAccess    = OCSP;URI:http://{{ ad_srv_shortname }}.{{ domain }}
+] ***
+2022-05-16 11:23:55,261 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:23:55,270 p=18761 u=bk n=ansible | TASK [Issue cert for users _raw_params=env REALM={{ REALM }} NAME={{ item.smb_user }} openssl ca -batch -in demoCA/{{ item.smb_user }}.csr -out demoCA/certs/{{ item.smb_user }}.pem -cert demoCA/certs/cacert.pem -extfile demoCA/{{ extension_file_user }} -extensions kdc_user
+] ***
+2022-05-16 11:23:55,942 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024})
+2022-05-16 11:23:56,533 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048})
+2022-05-16 11:23:57,129 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048})
+2022-05-16 11:23:57,139 p=18761 u=bk n=ansible | TASK [debug msg=["{{ gen_cert_users.results | map(attribute='cmd') | list }}", "{{ gen_cert_users.results | map(attribute='stderr_lines') | list }}"]] ***
+2022-05-16 11:23:57,178 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "env REALM=TEST5.ALT NAME=rt_smb openssl ca -batch -in demoCA/rt_smb.csr -out demoCA/certs/rt_smb.pem -cert demoCA/certs/cacert.pem -extfile demoCA/./cert_extension_user -extensions kdc_user\n",
+            "env REALM=TEST5.ALT NAME=es_smb openssl ca -batch -in demoCA/es_smb.csr -out demoCA/certs/es_smb.pem -cert demoCA/certs/cacert.pem -extfile demoCA/./cert_extension_user -extensions kdc_user\n",
+            "env REALM=TEST5.ALT NAME=jc_smb openssl ca -batch -in demoCA/jc_smb.csr -out demoCA/certs/jc_smb.pem -cert demoCA/certs/cacert.pem -extfile demoCA/./cert_extension_user -extensions kdc_user\n"
+        ],
+        [
+            [
+                "Using configuration from /var/lib/ssl/openssl.cnf",
+                "Check that the request matches the signature",
+                "Signature ok",
+                "Certificate Details:",
+                "        Serial Number: 2 (0x2)",
+                "        Validity",
+                "            Not Before: May 16 08:23:54 2022 GMT",
+                "            Not After : May 16 08:23:54 2023 GMT",
+                "        Subject:",
+                "            countryName               = RU",
+                "            stateOrProvinceName       = Moscow",
+                "            organizationName          = TEST5.ALT",
+                "            commonName                = rt_smb",
+                "        X509v3 extensions:",
+                "            X509v3 Basic Constraints: ",
+                "                CA:FALSE",
+                "            X509v3 Key Usage: ",
+                "                Digital Signature, Non Repudiation, Key Encipherment",
+                "            X509v3 Subject Key Identifier: ",
+                "                D7:C5:59:DA:52:CE:66:2E:5F:A7:88:71:37:0D:F7:BA:54:2D:5B:9B",
+                "            X509v3 Authority Key Identifier: ",
+                "                keyid:15:79:3E:ED:9D:A2:25:BF:DB:DB:2A:0F:85:46:C5:67:95:CE:80:9A",
+                "",
+                "            X509v3 Subject Alternative Name: ",
+                "                othername:<unsupported>",
+                "            X509v3 Issuer Alternative Name: ",
+                "                <EMPTY>",
+                "",
+                "            X509v3 Extended Key Usage: ",
+                "                TLS Web Client Authentication, Microsoft Smartcard Login",
+                "            Authority Information Access: ",
+                "                OCSP - URI:http://sp8-srv-2022.test5.alt",
+                "",
+                "Certificate is to be certified until May 16 08:23:54 2023 GMT (365 days)",
+                "",
+                "Write out database with 1 new entries",
+                "Data Base Updated"
+            ],
+            [
+                "Using configuration from /var/lib/ssl/openssl.cnf",
+                "Check that the request matches the signature",
+                "Signature ok",
+                "Certificate Details:",
+                "        Serial Number: 3 (0x3)",
+                "        Validity",
+                "            Not Before: May 16 08:23:55 2022 GMT",
+                "            Not After : May 16 08:23:55 2023 GMT",
+                "        Subject:",
+                "            countryName               = RU",
+                "            stateOrProvinceName       = Moscow",
+                "            organizationName          = TEST5.ALT",
+                "            commonName                = es_smb",
+                "        X509v3 extensions:",
+                "            X509v3 Basic Constraints: ",
+                "                CA:FALSE",
+                "            X509v3 Key Usage: ",
+                "                Digital Signature, Non Repudiation, Key Encipherment",
+                "            X509v3 Subject Key Identifier: ",
+                "                0B:B4:D3:FA:64:FD:48:92:A5:54:F0:71:3D:47:3C:62:20:B7:1F:DF",
+                "            X509v3 Authority Key Identifier: ",
+                "                keyid:15:79:3E:ED:9D:A2:25:BF:DB:DB:2A:0F:85:46:C5:67:95:CE:80:9A",
+                "",
+                "            X509v3 Subject Alternative Name: ",
+                "                othername:<unsupported>",
+                "            X509v3 Issuer Alternative Name: ",
+                "                <EMPTY>",
+                "",
+                "            X509v3 Extended Key Usage: ",
+                "                TLS Web Client Authentication, Microsoft Smartcard Login",
+                "            Authority Information Access: ",
+                "                OCSP - URI:http://sp8-srv-2022.test5.alt",
+                "",
+                "Certificate is to be certified until May 16 08:23:55 2023 GMT (365 days)",
+                "",
+                "Write out database with 1 new entries",
+                "Data Base Updated"
+            ],
+            [
+                "Using configuration from /var/lib/ssl/openssl.cnf",
+                "Check that the request matches the signature",
+                "Signature ok",
+                "Certificate Details:",
+                "        Serial Number: 4 (0x4)",
+                "        Validity",
+                "            Not Before: May 16 08:23:55 2022 GMT",
+                "            Not After : May 16 08:23:55 2023 GMT",
+                "        Subject:",
+                "            countryName               = RU",
+                "            stateOrProvinceName       = Moscow",
+                "            organizationName          = TEST5.ALT",
+                "            commonName                = jc_smb",
+                "        X509v3 extensions:",
+                "            X509v3 Basic Constraints: ",
+                "                CA:FALSE",
+                "            X509v3 Key Usage: ",
+                "                Digital Signature, Non Repudiation, Key Encipherment",
+                "            X509v3 Subject Key Identifier: ",
+                "                86:80:1C:67:AF:11:57:05:3F:8B:68:C4:D0:B2:70:CE:E2:43:DC:E7",
+                "            X509v3 Authority Key Identifier: ",
+                "                keyid:15:79:3E:ED:9D:A2:25:BF:DB:DB:2A:0F:85:46:C5:67:95:CE:80:9A",
+                "",
+                "            X509v3 Subject Alternative Name: ",
+                "                othername:<unsupported>",
+                "            X509v3 Issuer Alternative Name: ",
+                "                <EMPTY>",
+                "",
+                "            X509v3 Extended Key Usage: ",
+                "                TLS Web Client Authentication, Microsoft Smartcard Login",
+                "            Authority Information Access: ",
+                "                OCSP - URI:http://sp8-srv-2022.test5.alt",
+                "",
+                "Certificate is to be certified until May 16 08:23:55 2023 GMT (365 days)",
+                "",
+                "Write out database with 1 new entries",
+                "Data Base Updated"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:23:57,188 p=18761 u=bk n=ansible | TASK [Copy cert for user on token _raw_params=pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p {{ item.pin }} -l --write-object ./demoCA/certs/{{ item.smb_user }}.pem --type cert --id {{ item.id_cert }} --label {{ item.label_cert }} --token-label {{ item.label_slot }}
+] ***
+2022-05-16 11:24:06,267 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024})
+2022-05-16 11:24:14,473 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048})
+2022-05-16 11:24:21,872 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048})
+2022-05-16 11:24:21,882 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:21,916 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "msg": "All items completed",
+        "results": [
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --write-object ./demoCA/certs/rt_smb.pem --type cert --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n",
+                "delta": "0:00:08.394966",
+                "end": "2022-05-16 11:24:04.837833",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --write-object ./demoCA/certs/rt_smb.pem --type cert --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n",
+                        "_uses_shell": true,
+                        "argv": null,
+                        "chdir": null,
+                        "creates": null,
+                        "executable": null,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true,
+                        "warn": true
+                    }
+                },
+                "item": {
+                    "id_cert": 7011,
+                    "keySize": 1024,
+                    "label_cert": "rt_2fa_smb",
+                    "label_slot": "RutokenECP2151",
+                    "name": "rutoken",
+                    "pin": 12345678,
+                    "smb_user": "rt_smb"
+                },
+                "rc": 0,
+                "start": "2022-05-16 11:23:56.442867",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "Created certificate:\nCertificate Object; type = X.509 cert\n  label:      rt_2fa_smb\n  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=rt_smb\n  ID:         7011",
+                "stdout_lines": [
+                    "Created certificate:",
+                    "Certificate Object; type = X.509 cert",
+                    "  label:      rt_2fa_smb",
+                    "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=rt_smb",
+                    "  ID:         7011"
+                ]
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --write-object ./demoCA/certs/es_smb.pem --type cert --id 7012 --label es_2fa_smb --token-label esmart_64\n",
+                "delta": "0:00:07.561946",
+                "end": "2022-05-16 11:24:13.049211",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --write-object ./demoCA/certs/es_smb.pem --type cert --id 7012 --label es_2fa_smb --token-label esmart_64\n",
+                        "_uses_shell": true,
+                        "argv": null,
+                        "chdir": null,
+                        "creates": null,
+                        "executable": null,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true,
+                        "warn": true
+                    }
+                },
+                "item": {
+                    "id_cert": 7012,
+                    "keySize": 2048,
+                    "label_cert": "es_2fa_smb",
+                    "label_slot": "esmart_64",
+                    "name": "esmart",
+                    "pin": 12345678,
+                    "smb_user": "es_smb"
+                },
+                "rc": 0,
+                "start": "2022-05-16 11:24:05.487265",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "Created certificate:\nCertificate Object; type = X.509 cert\n  label:      es_2fa_smb\n  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=es_smb\n  ID:         7012",
+                "stdout_lines": [
+                    "Created certificate:",
+                    "Certificate Object; type = X.509 cert",
+                    "  label:      es_2fa_smb",
+                    "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=es_smb",
+                    "  ID:         7012"
+                ]
+            },
+            {
+                "ansible_loop_var": "item",
+                "changed": true,
+                "cmd": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --write-object ./demoCA/certs/jc_smb.pem --type cert --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n",
+                "delta": "0:00:06.863382",
+                "end": "2022-05-16 11:24:20.443265",
+                "failed": false,
+                "invocation": {
+                    "module_args": {
+                        "_raw_params": "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --write-object ./demoCA/certs/jc_smb.pem --type cert --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n",
+                        "_uses_shell": true,
+                        "argv": null,
+                        "chdir": null,
+                        "creates": null,
+                        "executable": null,
+                        "removes": null,
+                        "stdin": null,
+                        "stdin_add_newline": true,
+                        "strip_empty_ends": true,
+                        "warn": true
+                    }
+                },
+                "item": {
+                    "id_cert": 7013,
+                    "keySize": 2048,
+                    "label_cert": "jc_2fa_smb",
+                    "label_slot": "jacarta-slot-laser",
+                    "name": "jacarta",
+                    "pin": 11111111,
+                    "smb_user": "jc_smb"
+                },
+                "rc": 0,
+                "start": "2022-05-16 11:24:13.579883",
+                "stderr": "",
+                "stderr_lines": [],
+                "stdout": "Created certificate:\nCertificate Object; type = X.509 cert\n  label:      jc_2fa_smb\n  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=jc_smb\n  ID:         7013",
+                "stdout_lines": [
+                    "Created certificate:",
+                    "Certificate Object; type = X.509 cert",
+                    "  label:      jc_2fa_smb",
+                    "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=jc_smb",
+                    "  ID:         7013"
+                ]
+            }
+        ]
+    }
+}
+2022-05-16 11:24:21,924 p=18761 u=bk n=ansible | TASK [debug msg=["{{ reg.results | map(attribute='cmd') | list }}", "{{ reg.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:24:21,959 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --write-object ./demoCA/certs/rt_smb.pem --type cert --id 7011 --label rt_2fa_smb --token-label RutokenECP2151\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 12345678 -l --write-object ./demoCA/certs/es_smb.pem --type cert --id 7012 --label es_2fa_smb --token-label esmart_64\n",
+            "pkcs11-tool --module /usr/lib64/p11-kit-proxy.so -p 11111111 -l --write-object ./demoCA/certs/jc_smb.pem --type cert --id 7013 --label jc_2fa_smb --token-label jacarta-slot-laser\n"
+        ],
+        [
+            [
+                "Created certificate:",
+                "Certificate Object; type = X.509 cert",
+                "  label:      rt_2fa_smb",
+                "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=rt_smb",
+                "  ID:         7011"
+            ],
+            [
+                "Created certificate:",
+                "Certificate Object; type = X.509 cert",
+                "  label:      es_2fa_smb",
+                "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=es_smb",
+                "  ID:         7012"
+            ],
+            [
+                "Created certificate:",
+                "Certificate Object; type = X.509 cert",
+                "  label:      jc_2fa_smb",
+                "  subject:    DN: C=RU, ST=Moscow, O=TEST5.ALT, CN=jc_smb",
+                "  ID:         7013"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:24:21,968 p=18761 u=bk n=ansible | TASK [Create OCSP key _raw_params=openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform PEM -out demoCA/private/ocsp-key.pem
+] ***
+2022-05-16 11:24:22,813 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:22,822 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ reg.cmd }}', '{{ reg.stderr_lines }}']] ***********************
+2022-05-16 11:24:22,855 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform PEM -out demoCA/private/ocsp-key.pem\n",
+        [
+            "...............................................................................+++++",
+            "............+++++"
+        ]
+    ]
+}
+2022-05-16 11:24:22,864 p=18761 u=bk n=ansible | TASK [Создаем файл расширений (extensions) сертификата службы OCSP dest=demoCA/{{ extension_file_ocsp }}, content=[ ocsp ]
+# Extension for OCSP signing certificates (`man ocsp`).
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = critical, digitalSignature
+extendedKeyUsage = critical, OCSPSigning
+] ***
+2022-05-16 11:24:24,115 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:24,123 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:24,154 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "checksum": "034c448c96508a1895512197aeb15ce600f51ee8",
+        "dest": "demoCA/./cert_extension_ocsp",
+        "diff": [],
+        "failed": false,
+        "gid": 500,
+        "group": "user",
+        "md5sum": "67538af6599de13ff385b370b7a64269",
+        "mode": "0644",
+        "owner": "user",
+        "size": 238,
+        "src": "/home/user/.ansible/tmp/ansible-tmp-1652689462.9691577-20201-230915038719411/source",
+        "state": "file",
+        "uid": 500
+    }
+}
+2022-05-16 11:24:24,163 p=18761 u=bk n=ansible | TASK [Create OCSP req _raw_params=openssl req -new -out demoCA/ocsp-req.csr -key demoCA/private/ocsp-key.pem -subj "/C=RU/ST=Moscow/O={{ REALM }}/CN={{ ocsp_srv_shortname }}.{{ domain }}"
+] ***
+2022-05-16 11:24:24,840 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:24,849 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ reg.cmd }}', '{{ reg.stderr_lines }}']] ***********************
+2022-05-16 11:24:24,882 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: openssl req -new -out demoCA/ocsp-req.csr -key demoCA/private/ocsp-key.pem -subj \"/C=RU/ST=Moscow/O=TEST5.ALT/CN=ocsp.test5.alt\"\n",
+        []
+    ]
+}
+2022-05-16 11:24:24,891 p=18761 u=bk n=ansible | TASK [Create OCSP cert _raw_params=env REALM={{ REALM }} openssl ca -batch -in demoCA/ocsp-req.csr -out demoCA/certs/ocsp-cert.pem -cert demoCA/certs/cacert.pem -extfile demoCA/{{ extension_file_ocsp }} -extensions ocsp
+] ***
+2022-05-16 11:24:25,577 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:25,586 p=18761 u=bk n=ansible | TASK [ansible.builtin.debug msg=['register.cmd: {{ reg.cmd }}', '{{ reg.stderr_lines }}']] ***********************
+2022-05-16 11:24:25,618 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: env REALM=TEST5.ALT openssl ca -batch -in demoCA/ocsp-req.csr -out demoCA/certs/ocsp-cert.pem -cert demoCA/certs/cacert.pem -extfile demoCA/./cert_extension_ocsp -extensions ocsp\n",
+        [
+            "Using configuration from /var/lib/ssl/openssl.cnf",
+            "Check that the request matches the signature",
+            "Signature ok",
+            "Certificate Details:",
+            "        Serial Number: 5 (0x5)",
+            "        Validity",
+            "            Not Before: May 16 08:24:24 2022 GMT",
+            "            Not After : May 16 08:24:24 2023 GMT",
+            "        Subject:",
+            "            countryName               = RU",
+            "            stateOrProvinceName       = Moscow",
+            "            organizationName          = TEST5.ALT",
+            "            commonName                = ocsp.test5.alt",
+            "        X509v3 extensions:",
+            "            X509v3 Basic Constraints: ",
+            "                CA:FALSE",
+            "            X509v3 Subject Key Identifier: ",
+            "                0B:14:B0:90:57:AE:7C:2D:B2:96:E4:70:AB:C2:8A:67:A3:68:1B:BD",
+            "            X509v3 Authority Key Identifier: ",
+            "                keyid:15:79:3E:ED:9D:A2:25:BF:DB:DB:2A:0F:85:46:C5:67:95:CE:80:9A",
+            "",
+            "            X509v3 Key Usage: critical",
+            "                Digital Signature",
+            "            X509v3 Extended Key Usage: critical",
+            "                OCSP Signing",
+            "Certificate is to be certified until May 16 08:24:24 2023 GMT (365 days)",
+            "",
+            "Write out database with 1 new entries",
+            "Data Base Updated"
+        ]
+    ]
+}
+2022-05-16 11:24:25,627 p=18761 u=bk n=ansible | TASK [Remove old certs and keys from Samba path=/var/lib/samba/private/tls/, state=absent] ***********************
+2022-05-16 11:24:26,379 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:26,388 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:26,420 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "diff": {
+            "after": {
+                "path": "/var/lib/samba/private/tls/",
+                "state": "absent"
+            },
+            "before": {
+                "path": "/var/lib/samba/private/tls/",
+                "path_content": {
+                    "directories": [],
+                    "files": [
+                        "/var/lib/samba/private/tls/cert.pem",
+                        "/var/lib/samba/private/tls/ca.pem",
+                        "/var/lib/samba/private/tls/key.pem"
+                    ]
+                },
+                "state": "directory"
+            }
+        },
+        "failed": false,
+        "path": "/var/lib/samba/private/tls/",
+        "state": "absent"
+    }
+}
+2022-05-16 11:24:26,429 p=18761 u=bk n=ansible | TASK [Create tls folder from Samba path=/var/lib/samba/private/tls, state=directory] *****************************
+2022-05-16 11:24:27,045 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:27,053 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:27,084 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "diff": {
+            "after": {
+                "path": "/var/lib/samba/private/tls",
+                "state": "directory"
+            },
+            "before": {
+                "path": "/var/lib/samba/private/tls",
+                "state": "absent"
+            }
+        },
+        "failed": false,
+        "gid": 0,
+        "group": "root",
+        "mode": "0755",
+        "owner": "root",
+        "path": "/var/lib/samba/private/tls",
+        "size": 4096,
+        "state": "directory",
+        "uid": 0
+    }
+}
+2022-05-16 11:24:27,093 p=18761 u=bk n=ansible | TASK [Copy CA cert to samba src=demoCA/certs/cacert.pem, dest=/var/lib/samba/private/tls/cacert.pem, remote_src=True] ***
+2022-05-16 11:24:27,769 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:27,778 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:27,808 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "checksum": "4a3c6a71d37ec05f7162f522fb052b894052477a",
+        "dest": "/var/lib/samba/private/tls/cacert.pem",
+        "failed": false,
+        "gid": 0,
+        "group": "root",
+        "md5sum": "bb7dd724daafe7f6db152c15e7caeb60",
+        "mode": "0644",
+        "owner": "root",
+        "size": 1224,
+        "src": "demoCA/certs/cacert.pem",
+        "state": "file",
+        "uid": 0
+    }
+}
+2022-05-16 11:24:27,817 p=18761 u=bk n=ansible | TASK [Copy DC key to samba src=demoCA/private/dc-key.pem, dest=/var/lib/samba/private/tls/dc-key.pem, mode=384, remote_src=True] ***
+2022-05-16 11:24:28,507 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:28,516 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:28,547 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "checksum": "28ca0e3a9debe032ad89be749f5d1503f1c2cc9a",
+        "dest": "/var/lib/samba/private/tls/dc-key.pem",
+        "failed": false,
+        "gid": 0,
+        "group": "root",
+        "md5sum": "1e35be7abed246a57bed94671351d2d3",
+        "mode": "0600",
+        "owner": "root",
+        "size": 1675,
+        "src": "demoCA/private/dc-key.pem",
+        "state": "file",
+        "uid": 0
+    }
+}
+2022-05-16 11:24:28,555 p=18761 u=bk n=ansible | TASK [Copy DC cert to samba src=demoCA/certs/dc-cert.pem, dest=/var/lib/samba/private/tls/dc-cert.pem, remote_src=True] ***
+2022-05-16 11:24:29,237 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:29,247 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:29,277 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "checksum": "60bf127f0a8b4391ca24bc626e10a0bccb1276be",
+        "dest": "/var/lib/samba/private/tls/dc-cert.pem",
+        "failed": false,
+        "gid": 0,
+        "group": "root",
+        "md5sum": "26c0e1b23b6a7df8c77396adfaab96ad",
+        "mode": "0644",
+        "owner": "root",
+        "size": 4926,
+        "src": "demoCA/certs/dc-cert.pem",
+        "state": "file",
+        "uid": 0
+    }
+}
+2022-05-16 11:24:29,286 p=18761 u=bk n=ansible | TASK [Add TLS to smb.conf path=/etc/samba/smb.conf, state=present, insertbefore=\[sysvol\], block=        tls enabled = yes
+        tls certfile = /var/lib/samba/private/tls/dc-cert.pem
+        tls keyfile = /var/lib/samba/private/tls/dc-key.pem
+        tls cafile = /var/lib/samba/private/tls/cacert.pem
+, backup=True] ***
+2022-05-16 11:24:30,188 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:30,197 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:30,228 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "diff": [
+            {
+                "after": "",
+                "after_header": "/etc/samba/smb.conf (content)",
+                "before": "",
+                "before_header": "/etc/samba/smb.conf (content)"
+            },
+            {
+                "after_header": "/etc/samba/smb.conf (file attributes)",
+                "before_header": "/etc/samba/smb.conf (file attributes)"
+            }
+        ],
+        "failed": false,
+        "msg": "Block inserted"
+    }
+}
+2022-05-16 11:24:30,237 p=18761 u=bk n=ansible | TASK [Add pkinit to kerberos on samba AD 1 path=/etc/krb5.conf, state=present, insertafter=dns_lookup_kdc, line=         pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem] ***
+2022-05-16 11:24:30,996 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:31,005 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:31,037 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "backup": "",
+        "changed": true,
+        "diff": [
+            {
+                "after": "",
+                "after_header": "/etc/krb5.conf (content)",
+                "before": "",
+                "before_header": "/etc/krb5.conf (content)"
+            },
+            {
+                "after_header": "/etc/krb5.conf (file attributes)",
+                "before_header": "/etc/krb5.conf (file attributes)"
+            }
+        ],
+        "failed": false,
+        "msg": "line added"
+    }
+}
+2022-05-16 11:24:31,046 p=18761 u=bk n=ansible | TASK [Add pkinit to kerberos on samba AD 2 path=/etc/krb5.conf, state=present, insertafter=EOF, block=[kdc]
+enable-pkinit = yes
+pkinit_identity = FILE:/var/lib/samba/private/tls/dc-cert.pem,/var/lib/samba/private/tls/dc-key.pem
+pkinit_anchors = FILE:/var/lib/samba/private/tls/cacert.pem
+pkinit_principal_in_certificate = yes
+pkinit_win2k_require_binding = yes
+, backup=True] ***
+2022-05-16 11:24:31,756 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:31,766 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:31,797 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "diff": [
+            {
+                "after": "",
+                "after_header": "/etc/krb5.conf (content)",
+                "before": "",
+                "before_header": "/etc/krb5.conf (content)"
+            },
+            {
+                "after_header": "/etc/krb5.conf (file attributes)",
+                "before_header": "/etc/krb5.conf (file attributes)"
+            }
+        ],
+        "failed": false,
+        "msg": "Block inserted"
+    }
+}
+2022-05-16 11:24:31,806 p=18761 u=bk n=ansible | TASK [Reload Samba after edit krb5.conf. state=restarted, daemon_reload=True, name=samba.service] ****************
+2022-05-16 11:24:33,270 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:33,280 p=18761 u=bk n=ansible | TASK [debug var=reg] *********************************************************************************************
+2022-05-16 11:24:33,317 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "reg": {
+        "changed": true,
+        "failed": false,
+        "name": "samba.service",
+        "state": "started",
+        "status": {
+            "ActiveEnterTimestamp": "Mon 2022-05-16 11:03:32 MSK",
+            "ActiveEnterTimestampMonotonic": "10681432",
+            "ActiveExitTimestampMonotonic": "0",
+            "ActiveState": "active",
+            "After": "systemd-journald.socket network-online.target sysinit.target basic.target system.slice network.target",
+            "AllowIsolate": "no",
+            "AllowedCPUs": "",
+            "AllowedMemoryNodes": "",
+            "AmbientCapabilities": "",
+            "AssertResult": "yes",
+            "AssertTimestamp": "Mon 2022-05-16 11:03:32 MSK",
+            "AssertTimestampMonotonic": "10486218",
+            "Before": "shutdown.target multi-user.target",
+            "BlockIOAccounting": "no",
+            "BlockIOWeight": "[not set]",
+            "CPUAccounting": "no",
+            "CPUAffinity": "",
+            "CPUAffinityFromNUMA": "no",
+            "CPUQuotaPerSecUSec": "infinity",
+            "CPUQuotaPeriodUSec": "infinity",
+            "CPUSchedulingPolicy": "0",
+            "CPUSchedulingPriority": "0",
+            "CPUSchedulingResetOnFork": "no",
+            "CPUShares": "[not set]",
+            "CPUUsageNSec": "[not set]",
+            "CPUWeight": "[not set]",
+            "CacheDirectoryMode": "0755",
+            "CanFreeze": "yes",
+            "CanIsolate": "no",
+            "CanReload": "yes",
+            "CanStart": "yes",
+            "CanStop": "yes",
+            "CapabilityBoundingSet": "cap_chown cap_dac_override cap_dac_read_search cap_fowner cap_fsetid cap_kill cap_setgid cap_setuid cap_setpcap cap_linux_immutable cap_net_bind_service cap_net_broadcast cap_net_admin cap_net_raw cap_ipc_lock cap_ipc_owner cap_sys_module cap_sys_rawio cap_sys_chroot cap_sys_ptrace cap_sys_pacct cap_sys_admin cap_sys_boot cap_sys_nice cap_sys_resource cap_sys_time cap_sys_tty_config cap_mknod cap_lease cap_audit_write cap_audit_control cap_setfcap cap_mac_override cap_mac_admin cap_syslog cap_wake_alarm cap_block_suspend cap_audit_read cap_perfmon cap_bpf cap_checkpoint_restore",
+            "CleanResult": "success",
+            "CollectMode": "inactive",
+            "ConditionResult": "yes",
+            "ConditionTimestamp": "Mon 2022-05-16 11:03:32 MSK",
+            "ConditionTimestampMonotonic": "10486214",
+            "ConfigurationDirectoryMode": "0755",
+            "Conflicts": "shutdown.target",
+            "ControlGroup": "/system.slice/samba.service",
+            "ControlPID": "0",
+            "CoredumpFilter": "0x33",
+            "DefaultDependencies": "yes",
+            "DefaultMemoryLow": "0",
+            "DefaultMemoryMin": "0",
+            "Delegate": "no",
+            "Description": "Samba AD Daemon",
+            "DevicePolicy": "auto",
+            "Documentation": "\"man:samba(8)\" \"man:samba(7)\" \"man:smb.conf(5)\"",
+            "DynamicUser": "no",
+            "EffectiveCPUs": "",
+            "EffectiveMemoryNodes": "",
+            "EnvironmentFiles": "/etc/sysconfig/samba (ignore_errors=yes)",
+            "ExecMainCode": "0",
+            "ExecMainExitTimestampMonotonic": "0",
+            "ExecMainPID": "2985",
+            "ExecMainStartTimestamp": "Mon 2022-05-16 11:03:32 MSK",
+            "ExecMainStartTimestampMonotonic": "10681380",
+            "ExecMainStatus": "0",
+            "ExecReload": "{ path=/bin/kill ; argv[]=/bin/kill -HUP $MAINPID ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+            "ExecReloadEx": "{ path=/bin/kill ; argv[]=/bin/kill -HUP $MAINPID ; flags= ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+            "ExecStart": "{ path=/usr/sbin/samba ; argv[]=/usr/sbin/samba --no-process-group $SAMBAOPTIONS ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+            "ExecStartEx": "{ path=/usr/sbin/samba ; argv[]=/usr/sbin/samba --no-process-group $SAMBAOPTIONS ; flags= ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+            "FailureAction": "none",
+            "FileDescriptorStoreMax": "0",
+            "FinalKillSignal": "9",
+            "FragmentPath": "/lib/systemd/system/samba.service",
+            "FreezerState": "running",
+            "GID": "[not set]",
+            "GuessMainPID": "yes",
+            "IOAccounting": "no",
+            "IOReadBytes": "18446744073709551615",
+            "IOReadOperations": "18446744073709551615",
+            "IOSchedulingClass": "0",
+            "IOSchedulingPriority": "0",
+            "IOWeight": "[not set]",
+            "IOWriteBytes": "18446744073709551615",
+            "IOWriteOperations": "18446744073709551615",
+            "IPAccounting": "no",
+            "IPEgressBytes": "[no data]",
+            "IPEgressPackets": "[no data]",
+            "IPIngressBytes": "[no data]",
+            "IPIngressPackets": "[no data]",
+            "Id": "samba.service",
+            "IgnoreOnIsolate": "no",
+            "IgnoreSIGPIPE": "yes",
+            "InactiveEnterTimestampMonotonic": "0",
+            "InactiveExitTimestamp": "Mon 2022-05-16 11:03:32 MSK",
+            "InactiveExitTimestampMonotonic": "10490027",
+            "InvocationID": "be1bfa6703aa411cb909a86cf09df995",
+            "JobRunningTimeoutUSec": "infinity",
+            "JobTimeoutAction": "none",
+            "JobTimeoutUSec": "infinity",
+            "KeyringMode": "private",
+            "KillMode": "control-group",
+            "KillSignal": "15",
+            "LimitAS": "infinity",
+            "LimitASSoft": "infinity",
+            "LimitCORE": "infinity",
+            "LimitCORESoft": "infinity",
+            "LimitCPU": "infinity",
+            "LimitCPUSoft": "infinity",
+            "LimitDATA": "infinity",
+            "LimitDATASoft": "infinity",
+            "LimitFSIZE": "infinity",
+            "LimitFSIZESoft": "infinity",
+            "LimitLOCKS": "infinity",
+            "LimitLOCKSSoft": "infinity",
+            "LimitMEMLOCK": "65536",
+            "LimitMEMLOCKSoft": "65536",
+            "LimitMSGQUEUE": "819200",
+            "LimitMSGQUEUESoft": "819200",
+            "LimitNICE": "0",
+            "LimitNICESoft": "0",
+            "LimitNOFILE": "16384",
+            "LimitNOFILESoft": "16384",
+            "LimitNPROC": "15534",
+            "LimitNPROCSoft": "15534",
+            "LimitRSS": "infinity",
+            "LimitRSSSoft": "infinity",
+            "LimitRTPRIO": "0",
+            "LimitRTPRIOSoft": "0",
+            "LimitRTTIME": "infinity",
+            "LimitRTTIMESoft": "infinity",
+            "LimitSIGPENDING": "15534",
+            "LimitSIGPENDINGSoft": "15534",
+            "LimitSTACK": "infinity",
+            "LimitSTACKSoft": "8388608",
+            "LoadState": "loaded",
+            "LockPersonality": "no",
+            "LogLevelMax": "-1",
+            "LogRateLimitBurst": "0",
+            "LogRateLimitIntervalUSec": "0",
+            "LogsDirectoryMode": "0755",
+            "MainPID": "2985",
+            "MemoryAccounting": "yes",
+            "MemoryCurrent": "270323712",
+            "MemoryDenyWriteExecute": "no",
+            "MemoryHigh": "infinity",
+            "MemoryLimit": "infinity",
+            "MemoryLow": "0",
+            "MemoryMax": "infinity",
+            "MemoryMin": "0",
+            "MemorySwapMax": "infinity",
+            "MountAPIVFS": "no",
+            "MountFlags": "",
+            "NFileDescriptorStore": "0",
+            "NRestarts": "0",
+            "NUMAMask": "",
+            "NUMAPolicy": "n/a",
+            "Names": "samba.service",
+            "NeedDaemonReload": "no",
+            "Nice": "0",
+            "NoNewPrivileges": "no",
+            "NonBlocking": "no",
+            "NotifyAccess": "none",
+            "OOMPolicy": "stop",
+            "OOMScoreAdjust": "0",
+            "OnFailureJobMode": "replace",
+            "PIDFile": "/run/samba.pid",
+            "Perpetual": "no",
+            "PrivateDevices": "no",
+            "PrivateMounts": "no",
+            "PrivateNetwork": "no",
+            "PrivateTmp": "no",
+            "PrivateUsers": "no",
+            "ProtectClock": "no",
+            "ProtectControlGroups": "no",
+            "ProtectHome": "no",
+            "ProtectHostname": "no",
+            "ProtectKernelLogs": "no",
+            "ProtectKernelModules": "no",
+            "ProtectKernelTunables": "no",
+            "ProtectSystem": "no",
+            "RefuseManualStart": "no",
+            "RefuseManualStop": "no",
+            "ReloadResult": "success",
+            "RemainAfterExit": "no",
+            "RemoveIPC": "no",
+            "Requires": "sysinit.target system.slice",
+            "Restart": "no",
+            "RestartKillSignal": "15",
+            "RestartUSec": "100ms",
+            "RestrictNamespaces": "no",
+            "RestrictRealtime": "no",
+            "RestrictSUIDSGID": "no",
+            "Result": "success",
+            "RootDirectoryStartOnly": "no",
+            "RootHashSignature": "",
+            "RuntimeDirectoryMode": "0755",
+            "RuntimeDirectoryPreserve": "no",
+            "RuntimeMaxUSec": "infinity",
+            "SameProcessGroup": "no",
+            "SecureBits": "0",
+            "SendSIGHUP": "no",
+            "SendSIGKILL": "yes",
+            "Slice": "system.slice",
+            "StandardError": "inherit",
+            "StandardInput": "null",
+            "StandardInputData": "",
+            "StandardOutput": "journal",
+            "StartLimitAction": "none",
+            "StartLimitBurst": "5",
+            "StartLimitIntervalUSec": "10s",
+            "StartupBlockIOWeight": "[not set]",
+            "StartupCPUShares": "[not set]",
+            "StartupCPUWeight": "[not set]",
+            "StartupIOWeight": "[not set]",
+            "StateChangeTimestamp": "Mon 2022-05-16 11:03:32 MSK",
+            "StateChangeTimestampMonotonic": "10681432",
+            "StateDirectoryMode": "0755",
+            "StatusErrno": "0",
+            "StopWhenUnneeded": "no",
+            "SubState": "running",
+            "SuccessAction": "none",
+            "SyslogFacility": "3",
+            "SyslogLevel": "6",
+            "SyslogLevelPrefix": "yes",
+            "SyslogPriority": "30",
+            "SystemCallErrorNumber": "0",
+            "TTYReset": "no",
+            "TTYVHangup": "no",
+            "TTYVTDisallocate": "no",
+            "TasksAccounting": "yes",
+            "TasksCurrent": "61",
+            "TasksMax": "4660",
+            "TimeoutAbortUSec": "1min 30s",
+            "TimeoutCleanUSec": "infinity",
+            "TimeoutStartFailureMode": "terminate",
+            "TimeoutStartUSec": "1min 30s",
+            "TimeoutStopFailureMode": "terminate",
+            "TimeoutStopUSec": "1min 30s",
+            "TimerSlackNSec": "50000",
+            "Transient": "no",
+            "Type": "forking",
+            "UID": "[not set]",
+            "UMask": "0022",
+            "UnitFilePreset": "disabled",
+            "UnitFileState": "enabled",
+            "UtmpMode": "init",
+            "WantedBy": "multi-user.target",
+            "Wants": "network-online.target",
+            "WatchdogSignal": "6",
+            "WatchdogTimestampMonotonic": "0",
+            "WatchdogUSec": "0"
+        }
+    }
+}
+2022-05-16 11:24:33,325 p=18761 u=bk n=ansible | TASK [Check Samba AD user exist _raw_params=samba-tool user list] ************************************************
+2022-05-16 11:24:34,370 p=18761 u=bk n=ansible | changed: [10.33.33.233]
+2022-05-16 11:24:34,379 p=18761 u=bk n=ansible | TASK [debug msg=['register.cmd: {{ reg.cmd }}', '{{ reg.stdout_lines }}', '{{ reg.stdout }}']] *******************
+2022-05-16 11:24:34,413 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "register.cmd: samba-tool user list",
+        [
+            "Guest",
+            "krbtgt",
+            "Administrator"
+        ],
+        "Guest\nkrbtgt\nAdministrator"
+    ]
+}
+2022-05-16 11:24:34,422 p=18761 u=bk n=ansible | TASK [Delete Samba AD user if it exist _raw_params=samba-tool user delete {{ item.smb_user }}                             
+] ***
+2022-05-16 11:24:34,457 p=18761 u=bk n=ansible | skipping: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024}) 
+2022-05-16 11:24:34,461 p=18761 u=bk n=ansible | skipping: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048}) 
+2022-05-16 11:24:34,466 p=18761 u=bk n=ansible | skipping: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048}) 
+2022-05-16 11:24:34,475 p=18761 u=bk n=ansible | TASK [Debug Delete Samba AD user if it exist msg=["{{ reg2.results | map(attribute='cmd') | list }}", "{{ reg2.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:24:34,512 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        "[AnsibleUndefined, AnsibleUndefined, AnsibleUndefined]",
+        "[AnsibleUndefined, AnsibleUndefined, AnsibleUndefined]"
+    ]
+}
+2022-05-16 11:24:34,521 p=18761 u=bk n=ansible | TASK [Create Samba AD user _raw_params=samba-tool user create {{ item.smb_user }} {{ smb_user_pass }}         --given-name={{ item.name }}                                          
+] ***
+2022-05-16 11:24:35,322 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'rt_smb', 'name': 'rutoken', 'label_slot': 'RutokenECP2151', 'label_cert': 'rt_2fa_smb', 'id_cert': 7011, 'pin': 12345678, 'keySize': 1024})
+2022-05-16 11:24:36,146 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'es_smb', 'name': 'esmart', 'label_slot': 'esmart_64', 'label_cert': 'es_2fa_smb', 'id_cert': 7012, 'pin': 12345678, 'keySize': 2048})
+2022-05-16 11:24:37,064 p=18761 u=bk n=ansible | changed: [10.33.33.233] => (item={'smb_user': 'jc_smb', 'name': 'jacarta', 'label_slot': 'jacarta-slot-laser', 'label_cert': 'jc_2fa_smb', 'id_cert': 7013, 'pin': 11111111, 'keySize': 2048})
+2022-05-16 11:24:37,074 p=18761 u=bk n=ansible | TASK [debug msg=["{{ reg.results | map(attribute='cmd') | list }}", "{{ reg.results | map(attribute='stdout_lines') | list }}"]] ***
+2022-05-16 11:24:37,109 p=18761 u=bk n=ansible | ok: [10.33.33.233] => {
+    "msg": [
+        [
+            "samba-tool user create rt_smb Pa$$word         --given-name=rutoken                                          \n",
+            "samba-tool user create es_smb Pa$$word         --given-name=esmart                                          \n",
+            "samba-tool user create jc_smb Pa$$word         --given-name=jacarta                                          \n"
+        ],
+        [
+            [
+                "User 'rt_smb' added successfully"
+            ],
+            [
+                "User 'es_smb' added successfully"
+            ],
+            [
+                "User 'jc_smb' added successfully"
+            ]
+        ]
+    ]
+}
+2022-05-16 11:24:37,110 p=18761 u=bk n=ansible | PLAY RECAP *******************************************************************************************************
+2022-05-16 11:24:37,111 p=18761 u=bk n=ansible | 10.33.33.233               : ok=74   changed=36   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   

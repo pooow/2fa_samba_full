@@ -1,0 +1,22 @@
+extends: default
+page:
+  layout: portrait
+  margin: [0.5in, 0.5in, 0.5in, 0.5in]
+base:
+  font-size: 11
+title_page:                                                                    
+  text_align: left                                                            
+  logo:                                                                        
+    top: 10%                                                                   
+  title:                                                                       
+    top: 55%                                                                   
+    font_size: floor($base_font_size * 2.0)
+  # https://docs.asciidoctor.org/pdf-converter/latest/theme/title-page/#authors
+  authors:
+    delimiter: '; '
+    content:
+      name_only: "{author}"
+      with_email: "{author} <{email}>"
+      with_url: "{url}[{author}]"
+codespan:
+  background_color: F5F5F5
